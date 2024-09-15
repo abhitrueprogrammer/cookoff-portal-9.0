@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Toaster } from "react-hot-toast";
+import ChangeDevice from "@/components/changeDevice/ChangeDevice";
 
 export const metadata: Metadata = {
   title: "CodeChef-VIT",
@@ -31,7 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <div className="bg-[#FFF8D8]">
+        <div className="lg:hidden block">
+          <ChangeDevice/>
+        </div>
+        <div className="bg-[#FFF8D8] hidden lg:block">
           <Toaster position="top-right" toastOptions={{ id: "_toast" }} />
           <Providers>{children}</Providers>
         </div>

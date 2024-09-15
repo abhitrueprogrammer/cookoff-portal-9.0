@@ -8,10 +8,8 @@ import styles from "./test-complete.module.css";
 export default function TestComplete() {
     return (
         <>
-            <div className="block lg:hidden">
-                <ChangeDevice />
-            </div>
-            <div className="hidden lg:block h-screen bg-dark">
+           
+            <div className=" h-screen bg-dark">
                 <NavBar />
                 <div className='bg-dark flex justify-center items-center flex-col h-[85vh]'>
                     <div className=''>
