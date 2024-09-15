@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import SelectLanguages from './SelectLanguages';
+import SelectLanguages from '../ui/SelectLanguages';
 import Editor from '@monaco-editor/react';
 
 export default function Codeeditor() {

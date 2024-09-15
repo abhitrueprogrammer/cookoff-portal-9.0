@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import styles from "./TestCases.module.css"
+
 
 export default function TestCases() {
     return (
@@ -19,10 +19,10 @@ export default function TestCases() {
                 </div>
                 <div className='text-white flex justify-center'>
                     <div className='w-[40%]'>
-                        <div className={styles.testCase}>test case</div>
-                        <div className={styles.testCase}>test case</div>
-                        <div className={styles.testCase}>test case</div>
-                        <div className={styles.testCase}>custom output</div>
+                        <div >test case</div>
+                        <div >test case</div>
+                        <div >test case</div>
+                        <div >custom output</div>
                     </div>
                     <div className='w-[60%]'>
                         <div>
