@@ -10,12 +10,11 @@ export default function TestComplete() {
         <>
            
             <div className=" h-screen bg-dark">
-                <NavBar />
                 <div className='bg-dark flex justify-center items-center flex-col h-[85vh]'>
                     <div className=''>
                         <div className='rounded-full border-[3px] border-accent'>
                             <div className='bg-lightGray border-[6px] border-dark rounded-full '>
-                                <Image src={check} alt='check' width={100} height={100} className={styles.checkImg} />
+                                <Image src={check} alt='check' width={100} height={100} className="!w-full" />
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ export default function NavBar() {
                     <span className='text-cream'>cook</span> <span className='text-accent'>off</span><span className='text-cream'> 9.0</span> </div>
                 <div className='flex text-cream justify-evenly'>
                     <button className='bg-dark2 text-sm px-7'>logout</button>
-                    <Image src={acc} height={100} width={100} alt='account' layout='responsive' className={styles.accImg} />
+                    <Image src={acc} height={100} width={100} alt='account' layout='responsive' className="!w-[20%]" />
                 </div>
             </div>
         </div>

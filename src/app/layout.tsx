@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import ChangeDevice from "@/components/changeDevice/ChangeDevice";
+import NavBar from "@/components/navBar/NavBar";
 
 export const metadata: Metadata = {
   title: "CodeChef-VIT",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <ChangeDevice/>
         </div>
         <div className="bg-[#FFF8D8] hidden lg:block">
+          <NavBar />
           <Toaster position="top-right" toastOptions={{ id: "_toast" }} />
           <Providers>{children}</Providers>
         </div>

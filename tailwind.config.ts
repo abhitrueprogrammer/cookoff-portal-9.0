@@ -20,6 +20,7 @@ export default {
 				lightGray: '#4D4D4D80',    // Semi-transparent gray background
 				cream: '#B7AB98',
 				dark2: '#1F1F1F',
+				green2 : '#1BA94C',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
