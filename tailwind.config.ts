@@ -18,7 +18,8 @@ export default {
 				dark: '#131313',           // For the background
 				accent: '#F14A16',         // For the border, buttons
 				lightGray: '#4D4D4D80',    // Semi-transparent gray background
-				cream: '#E4D8C6',
+				cream: '#B7AB98',
+				dark2: '#1F1F1F',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
