@@ -15,15 +15,16 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			colors: {
-				lightcream:'#C6BEAF',
-				lightcream2:'#484848',
-				gray1:'#202020',
+				viewSubmission: '#B7AB98',
+				lightcream: '#C6BEAF',
+				lightcream2: '#484848',
+				gray1: '#202020',
 				dark: '#131313',           // For the background
 				accent: '#F14A16',         // For the border, buttons
 				lightGray: '#4D4D4D80',    // Semi-transparent gray background
 				cream: '#B7AB98',
 				dark2: '#1F1F1F',
-				green2 : '#1BA94C',
+				green2: '#1BA94C',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
@@ -46,7 +47,7 @@ export default {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
 				},
-				
+
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
