@@ -8,7 +8,7 @@ import styles from "./test-complete.module.css";
 export default function TestComplete() {
     return (
         <>
-           
+           <NavBar/>
             <div className=" h-screen bg-dark">
                 <div className='bg-dark flex justify-center items-center flex-col h-[85vh]'>
                     <div className=''>
