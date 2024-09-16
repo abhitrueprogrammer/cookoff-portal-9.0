@@ -1,3 +1,5 @@
+import { svgPaths } from '../../assests/svgPaths';
+
 // Simulated API response object
 const roundData = {
   roundNumber: 1,
@@ -12,10 +14,10 @@ const roundData = {
 
 export default function Component() {
   return (
-    <div className=" text-white font-sans relative ml-16 " style={{ width: '60vw', height: '321px' }}>
+    <div className="text-white font-sans relative ml-16" style={{ width: '60vw', height: '321px' }}>
       <div className="absolute top-0 left-0 w-full z-10" style={{ width: '60vw' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="60vw" height="60" viewBox="0 0 955 60" fill="none">
-          <path d="M52.5 0H955V60L0 59V51L52.5 0Z" fill="#000" stroke="white" strokeWidth="1" />
+          <path d={svgPaths.roundHeader} fill="#000" stroke="white" strokeWidth="1" />
         </svg>
         <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 h-[60px]">
           <h1 className="text-[#F14A16] text-5xl font-bold tracking-wider px-5">ROUND {roundData.roundNumber}</h1>
@@ -24,7 +26,7 @@ export default function Component() {
       </div>
 
       <svg width="957" height="321" viewBox="0 0 957 321" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 left-0" style={{ width: '60vw' }}>
-        <path d="M0.5 320.5V51.7099L52.7043 0.5H956.5V269.291L904.794 320.5H477.796H0.5Z" fill="#202020" stroke="white" strokeWidth="1" />
+        <path d={svgPaths.roundBackground} fill="#202020" stroke="white" strokeWidth="1" />
       </svg>
 
       <div className="absolute top-[72px] left-6 right-[200px] flex flex-col gap-4">
