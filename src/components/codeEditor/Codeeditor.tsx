@@ -9,7 +9,7 @@ export default function Codeeditor() {
   function handleEditorDidMount(editor: any) {
     editorRef.current = editor;
     editor.focus();
-  }
+  } 
 
   function handleOnChange(value: string | undefined) {
     if (value) {
