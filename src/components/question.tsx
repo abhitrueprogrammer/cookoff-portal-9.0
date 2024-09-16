@@ -38,7 +38,7 @@ const Question = () => {
           <div>
             <span className="text-accent text-3xl font-bold">PROBLEM {selectedQuestionIndex + 1}: {selectedQuestion.Title}</span>
             <div className="bg-lightcream2 text-lightcream w-[80px] text-sm text-center ">{selectedQuestion.Points} Points</div>
-            <div className="my-[20px]">
+            <div className="my-5">
             <span className="text-accent text-xl mr-8">
               Problem
             </span>
