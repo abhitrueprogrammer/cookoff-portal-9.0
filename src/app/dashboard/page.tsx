@@ -5,7 +5,7 @@ import DashboardComponent from '../../components/ui/dashboard';
 const Dashboard = () => {
   return (
     <>
-      <div className="parent bg-zinc-900 min-h-screen flex flex-col justify-between">
+      <div className="parent bg-zinc-900 min-h-screen flex flex-col justify-between overflow-y-hidden">
         <div className="flex gap-12 mb-10">
           <div className="wrapper flex-grow">
             <div className="mt-44 mb-14">
