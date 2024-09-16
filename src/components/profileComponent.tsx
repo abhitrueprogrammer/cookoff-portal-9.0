@@ -1,8 +1,8 @@
 'use client'
 
+import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import { AddImageIconSVG, ProfileBackgroundSVG, ProfileHeaderSVG, ProfileIconSVG } from '../assests/svgPaths';
-
 // Simulated API response object
 const profileData = {
     username: "JohnDoe",
@@ -61,7 +61,12 @@ export default function Component() {
                 {/* Profile picture placeholder */}
                 <div className="mt-8 w-[149px] h-[146px] bg-[#2F2F2F] rounded-full flex items-center justify-center overflow-hidden group">
                     {profileImage ? (
-                        <img src={profileImage} alt="Profile" className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:rotate-360" />
+                        <Image
+                            src={profileImage}
+                            alt="Profile"
+                            layout="fill"
+                            className="object-cover transition-transform duration-500 ease-in-out group-hover:rotate-360"
+                        />
                     ) : (
                         <ProfileIconSVG className="transition-transform duration-500 ease-in-out group-hover:rotate-360" />
                     )}
