@@ -1,15 +1,16 @@
 import React, { useRef, useState } from 'react';
 import SelectLanguages from '../ui/SelectLanguages';
-import Editor from '@monaco-editor/react';
+import Editor, { type OnMount } from '@monaco-editor/react';
+import type * as monaco from 'monaco-editor';
 
 export default function Codeeditor() {
   const [sourceCode, setSourceCode] = useState('');
-  const editorRef = useRef(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-  function handleEditorDidMount(editor: any) {
+  const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
-  } 
+  };
 
   function handleOnChange(value: string | undefined) {
     if (value) {
@@ -18,7 +19,7 @@ export default function Codeeditor() {
   }
 
   return (
-    <div className="h-screen flex justify-center items-center bg-[#131313]">
+    <div className="h-full flex justify-center items-center bg-[#131313]">
       <div className="w-full max-w-4xl p-4 mt-[-80px]">
 
         <div className="flex items-center text-white text-xl mb-4 ">

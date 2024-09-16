@@ -7,6 +7,7 @@ import ChangeDevice from "@/components/changeDevice/ChangeDevice";
 // import NavBar from "@/components/navBar/NavBar";
 
 export const metadata: Metadata = {
+  metadataBase:  new URL('http://localhost:3000'),
   title: "CodeChef-VIT",
   description: "Made with ♡ by CodeChef-VIT",
   icons: [{ rel: "icon", url: "/cc-logo.svg" }],

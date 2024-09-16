@@ -5,10 +5,10 @@ import { useState } from "react";
 
 const Question = () => {
 
-  const [selectedQuestionId, setSelectedQuestionId] = useState(questions[0].ID);
+  const [selectedQuestionId, setSelectedQuestionId] = useState(questions[0]?.ID);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
 
-  const handleQuestionChange = (id, index) => {
+  const handleQuestionChange = (id: string, index: number) => {
     setSelectedQuestionId(id);
     setSelectedQuestionIndex(index);
   };
@@ -16,9 +16,7 @@ const Question = () => {
   const selectedQuestion = questions.find(question => question.ID === selectedQuestionId);
 
   return (
-    <div className="bg-gray1 flex flex-row h-screen w-[45%]">
-
-
+    <div className="bg-gray1 flex flex-row h-[86vh] w-[45%] overflow-y-scroll">
       <div className="flex flex-col w-[3vw] text-white ">
         {questions.map((question, index) => (
           <div

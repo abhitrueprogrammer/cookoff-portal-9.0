@@ -83,3 +83,21 @@
   font-weight: 400;
   font-style: normal;
 }
+
+::-webkit-scrollbar {
+  width: 0.4rem;
+  background: #535253;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0c0c0c;
+  border-radius: 0.6rem;
+  z-index: -99;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5c5957;
+  border-radius: 1rem;
+}

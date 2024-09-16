@@ -10,7 +10,7 @@ export default function TestCases() {
         true, false, true,
     ])
     return (
-        <div className='flex justify-center mt-[-100px]'>
+        <div className='flex justify-center'>
             <div className='grid grid-rows-[2fr_5fr_2fr] h-[85vh] w-full bg-dark'>
                 <div className='flex justify-center '>
                     <div className='w-full m-3 flex justify-between bg-lightGray items-center px-3'>

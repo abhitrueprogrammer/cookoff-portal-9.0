@@ -5,7 +5,7 @@ import TestCases from '@/components/testCases/TestCases';
 
 export default function EditorWindow() {
   return (
-    <div className='flex flex-col w-[55%]'>
+    <div className='w-[55%] h-[86vh] overflow-y-auto'>
       <Codeeditor />
       <TestCases />
     </div>
