@@ -25,7 +25,7 @@ const Question = () => {
             key={question.ID}
             onClick={() => handleQuestionChange(question.ID, index)}
             className={`flex justify-center h-[80px] p-[22px] text-xl text-center border-b border-gray-700 cursor-pointer
-             ${question.ID === selectedQuestionId ? 'bg-[#202020]' : 'bg-black'}`}
+             ${question.ID === selectedQuestionId ? 'bg-gray1' : 'bg-black'}`}
           >
             <span className="h-full">{index + 1}</span>
           </div>
@@ -33,7 +33,7 @@ const Question = () => {
       </div>
 
       
-      <div className="ml-2 w-[100vw] p-4 text-white ">
+      <div className="ml-2 w-screen p-4 text-white ">
         {selectedQuestion && (
           <div>
             <span className="text-accent text-3xl font-bold">PROBLEM {selectedQuestionIndex + 1}: {selectedQuestion.Title}</span>
