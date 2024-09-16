@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
-import { svgPaths } from '../assests/svgPaths'
+import React, { useRef, useState } from 'react';
+import { svgPaths } from '../assests/svgPaths';
 
 // Simulated API response object
 const profileData = {
@@ -44,7 +44,7 @@ export default function Component() {
     }
 
     return (
-        <div className="relative w-[352px] h-[702px]">
+        <div className="relative w-[352px] h-[700px] roboto">
             {/* Background shape with white border */}
             <svg className="absolute top-0 left-0" width="352" height="702" viewBox="0 0 352 702" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d={svgPaths.backgroundShape} fill="#202020" stroke="white" strokeWidth="1" />
@@ -57,7 +57,7 @@ export default function Component() {
                     <svg width="352" height="61" viewBox="0 0 352 61" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d={svgPaths.profileHeader} fill="black" stroke="white" strokeWidth="1" />
                     </svg>
-                    <h1 className="absolute top-2 left-4 text-[#F14A16] text-4xl font-normal px-8 singapore-sling">
+                    <h1 className="absolute top-2 left-4 text-[#F14A16] text-4xl font-normal px-8 s-sling">
                         PROFILE
                     </h1>
                 </div>
@@ -109,8 +109,8 @@ export default function Component() {
             {/* Image Upload Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-                    <div className="bg-gray-100 rounded-lg p-6 w-full max-w-md">
-                        <h2 className="text-2xl font-bold mb-4">Upload Profile Image</h2>
+                    <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                        <h2 className="text-2xl font-bold mb-4 text-black">Upload Profile Image</h2>
                         <form onSubmit={handleSubmit}>
                             <input
                                 type="file"

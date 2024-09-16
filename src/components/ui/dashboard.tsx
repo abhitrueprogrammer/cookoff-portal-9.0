@@ -1,5 +1,4 @@
 import { svgPaths } from '../../assests/svgPaths';
-
 // Simulated API response object
 const roundData = {
   roundNumber: 1,
@@ -14,14 +13,14 @@ const roundData = {
 
 export default function Component() {
   return (
-    <div className="text-white font-sans relative ml-16" style={{ width: '60vw', height: '321px' }}>
+    <div className="text-white font-sans relative ml-16 roboto" style={{ width: '60vw', height: '321px' }}>
       <div className="absolute top-0 left-0 w-full z-10" style={{ width: '60vw' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="60vw" height="60" viewBox="0 0 955 60" fill="none">
           <path d={svgPaths.roundHeader} fill="#000" stroke="white" strokeWidth="1" />
         </svg>
         <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 h-[60px]">
-          <h1 className="text-[#F14A16] text-5xl font-bold tracking-wider px-5">ROUND {roundData.roundNumber}</h1>
-          <button className="text-white text-lg">View Submissions &gt;</button>
+          <h1 className="text-[#F14A16] text-5xl font-bold tracking-wider px-5 s-sling">ROUND {roundData.roundNumber}</h1>
+          <button className="text-viewSubmission text-lg">View Submissions &gt;</button>
         </div>
       </div>
 
