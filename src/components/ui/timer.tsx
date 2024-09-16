@@ -47,7 +47,7 @@ const Timer = () => {
   }, [expiryTime]);
 
   return (
-    <div style={{ padding: "8px",margin: "15px",color:'#F14A16', border: '2px solid #B7AB98', textAlign: "center" }}>
+    <div className="p-2 m-4 text-accent border-2 border-cream text-center">
       <h1 className="font-bold w-[100px] text-xl">{`${timeLeft.hours}:${timeLeft.minutes}:${timeLeft.seconds}`}</h1>
     </div>
   );
