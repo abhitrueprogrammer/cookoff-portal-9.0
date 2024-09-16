@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
 import { questions } from "@/app/sampleQuestion";
+import { useState } from "react";
 
 
 const Question = () => {
-  
+
   const [selectedQuestionId, setSelectedQuestionId] = useState(questions[0].ID);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
 
@@ -16,9 +16,9 @@ const Question = () => {
   const selectedQuestion = questions.find(question => question.ID === selectedQuestionId);
 
   return (
-    <div  className="bg-gray1 flex flex-row h-screen w-[50vw]">
-      
-      
+    <div className="bg-gray1 flex flex-row h-screen w-[45%]">
+
+
       <div className="flex flex-col w-[3vw] text-white ">
         {questions.map((question, index) => (
           <div
@@ -32,19 +32,19 @@ const Question = () => {
         ))}
       </div>
 
-      
+
       <div className="ml-2 w-screen p-4 text-white ">
         {selectedQuestion && (
           <div>
             <span className="text-accent text-3xl font-bold">PROBLEM {selectedQuestionIndex + 1}: {selectedQuestion.Title}</span>
             <div className="bg-lightcream2 text-lightcream w-[80px] text-sm text-center ">{selectedQuestion.Points} Points</div>
             <div className="my-5">
-            <span className="text-accent text-xl mr-8">
-              Problem
-            </span>
-            <span className="text-lightcream text-xl">
-              My Submissions
-            </span>
+              <span className="text-accent text-xl mr-8">
+                Problem
+              </span>
+              <span className="text-lightcream text-xl">
+                My Submissions
+              </span>
             </div>
             <p>{selectedQuestion.Description}</p>
             <br /><br />
