@@ -15,6 +15,9 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			colors: {
+				lightcream:'#C6BEAF',
+				lightcream2:'#484848',
+				gray1:'#202020',
 				dark: '#131313',           // For the background
 				accent: '#F14A16',         // For the border, buttons
 				lightGray: '#4D4D4D80',    // Semi-transparent gray background
