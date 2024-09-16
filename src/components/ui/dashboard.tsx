@@ -12,9 +12,9 @@ const roundData = {
 
 export default function Component() {
   return (
-    <div className=" text-white font-sans relative ml-16 " style={{ width: '50vw', height: '321px' }}>
-      <div className="absolute top-0 left-0 w-full z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" width="955" height="60" viewBox="0 0 955 60" fill="none">
+    <div className=" text-white font-sans relative ml-16 " style={{ width: '60vw', height: '321px' }}>
+      <div className="absolute top-0 left-0 w-full z-10" style={{ width: '60vw' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="60vw" height="60" viewBox="0 0 955 60" fill="none">
           <path d="M52.5 0H955V60L0 59V51L52.5 0Z" fill="#000" stroke="white" strokeWidth="1" />
         </svg>
         <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 h-[60px]">
@@ -23,7 +23,7 @@ export default function Component() {
         </div>
       </div>
 
-      <svg width="957" height="321" viewBox="0 0 957 321" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 left-0">
+      <svg width="957" height="321" viewBox="0 0 957 321" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 left-0" style={{ width: '60vw' }}>
         <path d="M0.5 320.5V51.7099L52.7043 0.5H956.5V269.291L904.794 320.5H477.796H0.5Z" fill="#202020" stroke="white" strokeWidth="1" />
       </svg>
 

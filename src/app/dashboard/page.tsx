@@ -22,15 +22,17 @@ const Dashboard: React.FC = () => {
   return (
     <>
       {isDesktop ? (
-        <div className="bg-gray-900 flex gap-16">
-          <div className="wrapper">
-            <div className="mt-44 mb-14">
+        <div className="parent bg-gray-900 ">
+          <div className=" flex gap-16 mb-10">
+            <div className="wrapper">
+              <div className="mt-44 mb-14">
+                <DashboardComponent />
+              </div>
               <DashboardComponent />
             </div>
-            <DashboardComponent />
-          </div>
-          <div className="absolute right-16 top-44">
-            <ProfileComponent />
+            <div className="absolute right-16 top-44">
+              <ProfileComponent />
+            </div>
           </div>
         </div>
 
