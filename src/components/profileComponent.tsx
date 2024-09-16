@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useState } from 'react';
-import { svgPaths } from '../assests/svgPaths';
+import { AddImageIconSVG, ProfileBackgroundSVG, ProfileHeaderSVG, ProfileIconSVG } from '../assests/svgPaths';
 
 // Simulated API response object
 const profileData = {
@@ -46,17 +46,13 @@ export default function Component() {
     return (
         <div className="relative w-[352px] h-[700px] roboto">
             {/* Background shape with white border */}
-            <svg className="absolute top-0 left-0" width="352" height="702" viewBox="0 0 352 702" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d={svgPaths.backgroundShape} fill="#202020" stroke="white" strokeWidth="1" />
-            </svg>
+            <ProfileBackgroundSVG className="absolute top-0 left-0" />
 
             {/* Content container */}
             <div className="relative z-10 flex flex-col items-center">
                 {/* Profile header with white border */}
                 <div className="w-full relative">
-                    <svg width="352" height="61" viewBox="0 0 352 61" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d={svgPaths.profileHeader} fill="black" stroke="white" strokeWidth="1" />
-                    </svg>
+                    <ProfileHeaderSVG />
                     <h1 className="absolute top-2 left-4 text-[#F14A16] text-4xl font-normal px-8 s-sling">
                         PROFILE
                     </h1>
@@ -67,9 +63,7 @@ export default function Component() {
                     {profileImage ? (
                         <img src={profileImage} alt="Profile" className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:rotate-360" />
                     ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="155" height="152" viewBox="0 0 155 152" fill="none" className="transition-transform duration-500 ease-in-out group-hover:rotate-360">
-                            <path d={svgPaths.profileIcon} stroke="#C1BBB3" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                        <ProfileIconSVG className="transition-transform duration-500 ease-in-out group-hover:rotate-360" />
                     )}
                 </div>
 
@@ -78,9 +72,7 @@ export default function Component() {
                     className="mt-4 px-4 py-2 bg-[#2F2F2F] text-white rounded-md flex items-center gap-2 hover:bg-[#3F3F3F] transition-colors duration-200"
                 >
                     Add Image
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
-                        <path d={svgPaths.addImageIcon} stroke="#B7AB98" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <AddImageIconSVG />
                 </button>
 
                 {/* Input fields */}
