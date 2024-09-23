@@ -1,15 +1,16 @@
 import React, { useRef, useState } from 'react';
-import SelectLanguages from './SelectLanguages';
-import Editor from '@monaco-editor/react';
+import SelectLanguages from '../ui/SelectLanguages';
+import Editor, { type OnMount } from '@monaco-editor/react';
+import type * as monaco from 'monaco-editor';
 
 export default function Codeeditor() {
   const [sourceCode, setSourceCode] = useState('');
-  const editorRef = useRef(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-  function handleEditorDidMount(editor: any) {
+  const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
-  }
+  };
 
   function handleOnChange(value: string | undefined) {
     if (value) {
@@ -18,9 +19,9 @@ export default function Codeeditor() {
   }
 
   return (
-    <div className="h-screen flex justify-center items-center bg-[#131313]">
-      <div className="w-full max-w-4xl p-4">
-        {/* Language dropdown */}
+    <div className="h-full flex justify-center items-center bg-[#131313]">
+      <div className="w-full max-w-4xl p-4 mt-[-80px]">
+
         <div className="flex items-center text-white text-xl mb-4 ">
           Languages:
           <div className="w-[150px]">
@@ -28,7 +29,6 @@ export default function Codeeditor() {
           </div>
         </div>
 
-        {/* Editor box */}
         <div className="flex rounded-3xl ">
           <Editor
             theme="vs-dark"
@@ -41,7 +41,6 @@ export default function Codeeditor() {
           />
         </div>
 
-        {/* Checkbox for custom input */}
         <div className="flex items-center mt-4 w-full">
           <input
             type="checkbox"
@@ -68,7 +67,6 @@ export default function Codeeditor() {
           </div>
         </div>
 
-        {/* Buttons */}
       </div>
     </div>
   );
