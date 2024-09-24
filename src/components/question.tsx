@@ -1,20 +1,31 @@
 "use client";
-// import { questions } from "@/app/sampleQuestion";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { cookies } from "next/headers";
 
 
+interface Question {
+  ID: string;
+  Description: string;
+  Title: string;
+  InputFormat: string;
+  Points: number;
+  Round: number;
+  Constraints: string;
+  OutputFormat: string;
+}
+
 const Question = () => {
-  const [questions, setQuestions] = useState([]);
-  const [selectedQuestionId, setSelectedQuestionId] = useState("");
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number>(0);
 
   const login = async () => {
     try {
       const response = await axios.post(
         "https://hope.codechefvit.com/login/user",
-        { email: "heet@codechefvit.com", password: "KS#1Cl" },
+        { email: "vedant.matanhelia@gmail.com", password: "]%-pmK" },
         { withCredentials: true }
       );
       console.log("Login successful:", response.data);
@@ -23,18 +34,18 @@ const Question = () => {
     }
   };
 
-  // const refresh = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       "https://hope.codechefvit.com/token/refresh",
-  //       {},
-  //       { withCredentials: true }
-  //     );
-  //     console.log("Token refreshed:", response.data);
-  //   } catch (err) {
-  //     console.error("Token refresh failed:", err);
-  //   }
-  // };
+  const refresh = async () => {
+    try {
+      const response = await axios.post(
+        "https://hope.codechefvit.com/token/refresh",
+        {},
+        { withCredentials: true }
+      );
+      console.log("Token refreshed:", response.data);
+    } catch (err) {
+      console.error("Token refresh failed:", err);
+    }
+  };
 
   const fetchQuestions = async () => {
     try {
@@ -55,7 +66,7 @@ const Question = () => {
     const authenticateAndFetchData = async () => {
       await login();
       setTimeout(async () => {
-        // await refresh();
+        await refresh();
         await fetchQuestions();
       }, 2000);
     };
@@ -69,20 +80,19 @@ const Question = () => {
   };
 
   const selectedQuestion = questions.find(
-    (question: any) => question.ID === selectedQuestionId
+    (question) => question.ID === selectedQuestionId
   );
 
   return (
     <div className="bg-gray1 flex flex-row h-[86vh] w-[45%] overflow-y-scroll">
       <div className="flex flex-col w-[3vw] text-white ">
-        {questions.map((question: any, index: number) => (
+        {questions.map((question) => (
           <div
             key={question.ID}
-            onClick={() => handleQuestionChange(question.ID, index)}
+            onClick={() => handleQuestionChange(question.ID, selectedQuestionIndex)}
             className={`flex justify-center h-[80px] p-[22px] text-xl text-center border-b border-gray-700 cursor-pointer
-             ${question.ID === selectedQuestionId ? "bg-gray1" : "bg-black"}`}
-          >
-            <span className="h-full">{index + 1}</span>
+             ${question.ID === selectedQuestionId ? "bg-gray1" : "bg-black"}`}>
+            <span className="h-full">{selectedQuestionIndex + 1}</span>
           </div>
         ))}
       </div>
