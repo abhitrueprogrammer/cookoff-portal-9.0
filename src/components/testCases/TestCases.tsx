@@ -1,7 +1,7 @@
 "use client"
 import TestComp from '../TestComp'
 import React, { useState } from 'react'
-import lock from "@/assests/images/lock.png"
+import lock from "@/assets/images/lock.png"
 import Image from 'next/image'
 
 
