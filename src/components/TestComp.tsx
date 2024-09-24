@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import gCheck from '@/assests/images/gCheck.png'
-import gEye from '@/assests/images/gEye.png'
-import rCross from '@/assests/images/rCross.png'
-import rEye from '@/assests/images/rEye.png'
+import gCheck from '@/assets/images/gCheck.png'
+import gEye from '@/assets/images/gEye.png'
+import rCross from '@/assets/images/rCross.png'
+import rEye from '@/assets/images/rEye.png'
 
 
 type TestCompProps = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import acc from "@/assests/images/acc.png"
+import acc from "@/assets/images/acc.png"
 import Image from 'next/image';
 import styles from "./navBar.module.css"
 

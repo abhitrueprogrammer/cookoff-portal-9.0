@@ -1,6 +1,6 @@
 "use client";
 import Image from 'next/image';
-import check from "@/assests/images/check.png";
+import check from "@/assets/images/check.png";
 import ChangeDevice from '../../components/changeDevice/ChangeDevice';
 import NavBar from '../../components/navBar/NavBar';
 import styles from "./test-complete.module.css";
