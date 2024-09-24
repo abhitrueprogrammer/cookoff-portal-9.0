@@ -23,25 +23,25 @@ const Question = () => {
     }
   };
 
-  const refresh = async () => {
-    try {
-      const response = await axios.post(
-        "https://hope.codechefvit.com/token/refresh",
-        {},
-        { withCredentials: true }
-      );
-      console.log("Token refreshed:", response.data);
-    } catch (err) {
-      console.error("Token refresh failed:", err);
-    }
-  };
+  // const refresh = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "https://hope.codechefvit.com/token/refresh",
+  //       {},
+  //       { withCredentials: true }
+  //     );
+  //     console.log("Token refreshed:", response.data);
+  //   } catch (err) {
+  //     console.error("Token refresh failed:", err);
+  //   }
+  // };
 
   const fetchQuestions = async () => {
     try {
       const response = await axios.get("https://hope.codechefvit.com/question/round", {
         withCredentials: true,
       });
-      const fetchedQuestions = response.data.map((item: any) => item.question);
+      const fetchedQuestions = response.data.map((item: any) => item.question); 
       setQuestions(fetchedQuestions);
       if (fetchedQuestions.length > 0) {
         setSelectedQuestionId(fetchedQuestions[0].ID); 
@@ -55,7 +55,7 @@ const Question = () => {
     const authenticateAndFetchData = async () => {
       await login();
       setTimeout(async () => {
-        await refresh();
+        // await refresh();
         await fetchQuestions();
       }, 2000);
     };
