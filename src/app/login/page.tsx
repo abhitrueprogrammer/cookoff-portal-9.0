@@ -3,10 +3,13 @@ import { handleAPIError } from "@/lib/error";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { type AxiosError } from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
+import cookoff from "../../assests/images/cookoff.svg";
+
 const FormSchema = z.object({
     username: z.string().trim(),
     password: z
@@ -18,8 +21,9 @@ const FormSchema = z.object({
 type FormInput = z.infer<typeof FormSchema>;
 
 export default function Login() {
-    const [, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     const {
         register,
@@ -35,7 +39,6 @@ export default function Login() {
             score: number | null
             username: string
         }
-
     }
     async function login(email: string, password: string) {
         try {
@@ -67,12 +70,12 @@ export default function Login() {
                             return "Incorrect credentials!";
                         case 403:
                             setTimeout(() => {
-                                window.location.href = `/signup/verify?email=${data.username}`;
+                                void router.push("/signup/verify?email=" + data.username);
                             }, 1500);
                             return "Email not verified. Redirecting...";
                         case 423:
                             setTimeout(() => {
-                                window.location.href = `/signup/details?email=${data.username}`;
+                                void router.push("/signup/details?email=" + data.username);
                             }, 1500);
                             return "Complete your profile. Redirecting...";
                         case 400:
@@ -82,12 +85,11 @@ export default function Login() {
                     }
                 },
             });
-            window.location.href = "/dashboard";
+            void router.push("/dashboard");
         } catch (err) {
             console.error("Login failed:", err);
         }
     }
-
     return (
         <div className="bg-[#202020] min-h-screen min-w-screen text-accent flex flex-col items-center justify-center">
             <h1 className="text-3xl font-bold pt-5">CODECHEF PRESENTS</h1>
@@ -96,7 +98,7 @@ export default function Login() {
                     <div className="flex flex-col">
                         <Image
                             className="pl-14"
-                            src="cookoff.svg"
+                            src={cookoff as HTMLImageElement}
                             alt="cookoff text"
                             width={700}
                             height={600}
@@ -130,7 +132,7 @@ export default function Login() {
                             <p className="text-viewSubmission mb-4">{errors.password.message}</p>
                         )}
                         <br />
-                        <button className="bg-accent text-white p-3 rounded-md w-[100px]" onClick={handleSubmit(onSubmit)}>
+                        <button className="bg-accent text-white p-3 rounded-md w-[100px] " disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                             Login
                         </button>
                     </div>
