@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 
 interface Question {
@@ -25,7 +25,7 @@ const Question = () => {
     try {
       const response = await axios.post(
         "https://hope.codechefvit.com/login/user",
-        { email: "vedant.matanhelia@gmail.com", password: "]%-pmK" },
+        { email: "heet@codechefvit.com", password: "KS#1Cl" },
         { withCredentials: true }
       );
       console.log("Login successful:", response.data);
@@ -34,18 +34,6 @@ const Question = () => {
     }
   };
 
-  const refresh = async () => {
-    try {
-      const response = await axios.post(
-        "https://hope.codechefvit.com/token/refresh",
-        {},
-        { withCredentials: true }
-      );
-      console.log("Token refreshed:", response.data);
-    } catch (err) {
-      console.error("Token refresh failed:", err);
-    }
-  };
 
   const fetchQuestions = async () => {
     try {
@@ -66,7 +54,6 @@ const Question = () => {
     const authenticateAndFetchData = async () => {
       await login();
       setTimeout(async () => {
-        await refresh();
         await fetchQuestions();
       }, 2000);
     };
