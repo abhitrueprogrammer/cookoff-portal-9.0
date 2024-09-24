@@ -1,100 +1,60 @@
 "use client";
+import { questions } from "@/app/sampleQuestion";
+import { useState } from "react";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-interface Question {
-  ID: string;
-  Description: string;
-  Title: string;
-  InputFormat: string;
-  Points: number;
-  Round: number;
-  Constraints: string;
-  OutputFormat: string;
-}
 
 const Question = () => {
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number>(0);
-  const [selectedQuestion, setSelectedQuestion] = useState<Question>();
 
-  const fetchQuestions = async () => {
-    try {
-      const response = await axios.get("https://hope.codechefvit.com/question/round", {
-        withCredentials: true,
-      });
-      const fetchedQuestions = response.data.map((item: { question: Question }) => item.question);
-      setQuestions(fetchedQuestions);
-      if (fetchedQuestions.length > 0) {
-        setSelectedQuestionId(fetchedQuestions[0].ID); 
-        setSelectedQuestionIndex(0);
-      }
-    } catch (err) {
-      console.error("Error fetching questions:", err);
-    }
-  };
+  const [selectedQuestionId, setSelectedQuestionId] = useState(questions[0]?.ID);
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
 
   const handleQuestionChange = (id: string, index: number) => {
     setSelectedQuestionId(id);
     setSelectedQuestionIndex(index);
   };
 
-  useEffect(()=>{
-    const temp = questions.find(
-      (question) => question.ID === selectedQuestionId
-    );
-    setSelectedQuestion(temp)
-  },[selectedQuestionId])
+  const selectedQuestion = questions.find(question => question.ID === selectedQuestionId);
 
   return (
     <div className="bg-gray1 flex flex-row h-[86vh] w-[45%] overflow-y-scroll">
-    <div className="flex flex-col w-[3vw] text-white">
-      {questions.map((question, index) => (
-        <div
-          key={question.ID}
-          onClick={() => handleQuestionChange(question.ID, index)}
-          className={`flex justify-center items-center h-[80px] p-[22px] text-xl text-center border-b border-gray-700 cursor-pointer
-           ${question.ID === selectedQuestionId ? 'bg-gray1' : 'bg-black'}`}>
-          <span className="h-full">{index + 1}</span>
-        </div>
-      ))}
-    </div>
-  
-    <div className="ml-2 w-screen p-4 text-white">
-      {selectedQuestion && (
-        <div>
-          <span className="text-accent text-3xl font-bold">
-            PROBLEM {selectedQuestionIndex + 1}: {selectedQuestion.Title}
-          </span>
-          <div className="bg-lightcream2 text-lightcream w-[80px] text-sm text-center">
-            {selectedQuestion.Points} Points
+      <div className="flex flex-col w-[3vw] text-white ">
+        {questions.map((question, index) => (
+          <div
+            key={question.ID}
+            onClick={() => handleQuestionChange(question.ID, index)}
+            className={`flex justify-center h-[80px] p-[22px] text-xl text-center border-b border-gray-700 cursor-pointer
+             ${question.ID === selectedQuestionId ? 'bg-gray1' : 'bg-black'}`}
+          >
+            <span className="h-full">{index + 1}</span>
           </div>
-          <div className="my-5">
-            <span className="text-accent text-xl mr-8">Problem</span>
-            <span className="text-lightcream text-xl">My Submissions</span>
+        ))}
+      </div>
+
+
+      <div className="ml-2 w-screen p-4 text-white ">
+        {selectedQuestion && (
+          <div>
+            <span className="text-accent text-3xl font-bold">PROBLEM {selectedQuestionIndex + 1}: {selectedQuestion.Title}</span>
+            <div className="bg-lightcream2 text-lightcream w-[80px] text-sm text-center ">{selectedQuestion.Points} Points</div>
+            <div className="my-5">
+              <span className="text-accent text-xl mr-8">
+                Problem
+              </span>
+              <span className="text-lightcream text-xl">
+                My Submissions
+              </span>
+            </div>
+            <p>{selectedQuestion.Description}</p>
+            <br /><br />
+            <p><strong>Input Format:</strong><br /> {selectedQuestion.InputFormat}</p>
+            <br />
+            <p><strong>Constraints:</strong><br /> {selectedQuestion.Constraints}</p>
+            <br />
+            <p><strong>Output Format:</strong> <br />{selectedQuestion.OutputFormat}</p>
           </div>
-          <p>{selectedQuestion.Description}</p>
-          <br />
-          <p>
-            <strong>Input Format:</strong><br />
-            {selectedQuestion.InputFormat}
-          </p>
-          <br />
-          <p>
-            <strong>Constraints:</strong><br />
-            {selectedQuestion.Constraints}
-          </p>
-          <br />
-          <p>
-            <strong>Output Format:</strong><br />
-            {selectedQuestion.OutputFormat}
-          </p>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-  </div>  
   );
 };
 
