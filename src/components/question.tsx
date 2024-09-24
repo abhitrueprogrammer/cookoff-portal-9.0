@@ -18,6 +18,7 @@ const Question = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number>(0);
+  const [selectedQuestion, setSelectedQuestion] = useState<Question>();
 
   const fetchQuestions = async () => {
     try {
@@ -40,9 +41,12 @@ const Question = () => {
     setSelectedQuestionIndex(index);
   };
 
-  const selectedQuestion = questions.find(
-    (question) => question.ID === selectedQuestionId
-  );
+  useEffect(()=>{
+    const temp = questions.find(
+      (question) => question.ID === selectedQuestionId
+    );
+    setSelectedQuestion(temp)
+  },[selectedQuestionId])
 
   return (
     <div className="bg-gray1 flex flex-row h-[86vh] w-[45%] overflow-y-scroll">
