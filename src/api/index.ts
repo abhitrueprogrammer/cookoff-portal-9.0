@@ -1,7 +1,6 @@
 import { type ApiResponse } from "@/schemas/api";
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
 import toast from "react-hot-toast";
-
 // Extend AxiosRequestConfig to include the _retry property
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
@@ -45,7 +44,7 @@ api.interceptors.response.use(
         // Handle refresh token error or redirect to login
         toast.error("Session expired. Please login again.");
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = "/login";
         }, 2000);
       }
     }
