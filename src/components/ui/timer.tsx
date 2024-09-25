@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 interface TimeCount {
   hours: string;
@@ -36,7 +36,7 @@ const Timer = () => {
   const [expiryTime] = useState(new Date().getTime() + timerDuration * 1000);
   const pathname = usePathname();
   const [timeLeft, setTimeLeft] = useState<TimeCount>(getTimeLeft(expiryTime));
-  const router = useRouter();
+  
   useEffect(() => {
     if (pathname === "/dashboard") {
       setTimeLeft({ hours: "00", minutes: "00", seconds: "00" });

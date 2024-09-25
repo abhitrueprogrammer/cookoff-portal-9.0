@@ -2,31 +2,29 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import api from "@/api";
 import {User,dashboard,Submission,APIResponse} from "@/schemas/api";
+import { me } from "@/api/me";
 
 export default function Component() {
   const [data, setData] = useState<dashboard>();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   useEffect(() => {
+    
     async function fetchData() {
+      setLoading(true);
       try {
-        const { data } = await api.get<APIResponse>(
-          "https://hope.codechefvit.com/me",
-        );
-        console.log(data);
-        setData(data.data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+        const data = await me();
+        setData(data);
+      } catch {
+        setError(true);
       }
+      setLoading(false);
     }
-
     fetchData();
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div>Error</div>;
 
   return (
     <div className="flex flex-grow roboto relative ml-16 w-[60vw] font-sans text-white">

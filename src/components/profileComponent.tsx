@@ -10,7 +10,7 @@ const profileData = {
 
 export default function Component() {
   return (
-    <div className="roboto relative my-auto max-h-full w-[352px]">
+    <div className="roboto relative my-auto max-h-full ">
       {/* Background shape with white border */}
       {/* <ProfileBackgroundSVG className="absolute top-0 left-0 max-h-fit" /> */}
 
@@ -19,7 +19,7 @@ export default function Component() {
         {/* Profile header with white border */}
         <div className="relative w-full">
           <ProfileHeaderSVG />
-          <h1 className="s-sling absolute left-4 top-2 px-8 text-4xl font-normal text-[#F14A16]">
+          <h1 className="s-sling absolute left-1/2 -translate-x-1/2 top-2 px-8 text-4xl font-normal text-[#F14A16] ">
             PROFILE
           </h1>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 import ProfileComponent from "@/components/profileComponent";
 import QuesNavbar from "@/components/quesNavBar";
-import DashboardComponent from "../../components/ui/dashboard";
+import DashboardComponent from "@/components/ui/dashboard";
 const Dashboard = () => {
 
   return (
