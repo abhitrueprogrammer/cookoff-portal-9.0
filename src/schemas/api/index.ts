@@ -9,7 +9,7 @@ export interface User {
   username: string;
 }
 export interface CodeSubmission {
-  source_code?: string;
+  source_code: string;
   language_id: number;
   question_id: string;
 }

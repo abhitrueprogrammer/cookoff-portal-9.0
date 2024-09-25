@@ -6,13 +6,11 @@ interface EditorWindowProps {
   selectedQuestionId: string;
 }
 
-const EditorWindow: React.FC<EditorWindowProps> = ({ selectedQuestionId }) => {
+export default function EditorWindow({ selectedQuestionId }: EditorWindowProps) {
   return (
     <div className='w-[55%] h-[86vh] overflow-y-auto'>
       <Codeeditor selectedquestionId={selectedQuestionId} />
       <TestCases />
     </div>
   )
-}
-
-export default EditorWindow;
+};

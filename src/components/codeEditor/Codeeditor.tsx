@@ -2,46 +2,13 @@ import api from '@/api';
 import { CodeEditorProps, CodeSubmission, SubmissionResponse } from '@/schemas/api';
 import Editor, { type OnMount } from '@monaco-editor/react';
 import type * as monaco from 'monaco-editor';
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import SelectLanguages from '../ui/SelectLanguages';
+import boilerplates from '@/data/boilerplates.json'; // Import the boilerplates JSON file
+import { submit } from '@/api/submit';
 
-
-
-// Boilerplate templates for each language
-const boilerplates: Record<number, string> = {
-  71: `print("Hello, World!")`, // Python
-  62: `public class Main {
-  public static void main(String[] args) {
-  System.out.println("Hello, World!");
-  }
-  }`, // Java
-  50: `#include <stdio.h>
-
-  int main() {
-  printf("Hello, World!");
-  return 0;
-  }`, // C
-  54: `#include <iostream>
-  using namespace std;
-
-  int main() {
-  cout << "Hello, World!";
-  return 0;
-  }`, // C++
-  63: `console.log("Hello, World!");`, // JavaScript
-  73: `fn main() {
-  println!("Hello, World!");
-  }`, // Rust
-  60: `package main
-  import "fmt"
-
-  func main() {
-  fmt.Println("Hello, World!")
-  }`, // Go
-};
-
-const CodeEditor: React.FC<CodeEditorProps> = ({ selectedquestionId }) => {
-  const [sourceCode, setSourceCode] = useState(boilerplates[71]); // Default to Python
+export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
+  const [sourceCode, setSourceCode] = useState(boilerplates["71"]); // Default to Python
   const [languageId, setLanguageId] = useState(71); // Default to Python
   const questionId = selectedquestionId; // Use selectedquestionId directly
   
@@ -57,6 +24,8 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ selectedquestionId }) => {
     }
   }, [localStorageKey]);
 
+
+
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
@@ -69,9 +38,10 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ selectedquestionId }) => {
     }
   }
 
+  // Dynamically change language and retrieve boilerplate from JSON file
   const handleLanguageChange = (id: number) => {
     setLanguageId(id);
-    setSourceCode(boilerplates[id] || ''); // Set boilerplate or empty if no template exists
+    setSourceCode((boilerplates as Record<string, string>)[id.toString()] || boilerplates["71"]); // Cast to Record<string, string>
   };
 
   async function handleSubmitCode() {
@@ -84,13 +54,9 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ selectedquestionId }) => {
     try {
       setIsSubmitting(true); // Set submitting state to true
 
-      const response = await api.post<SubmissionResponse>(`/submit`, codeSubmission, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const submissionId = response.data.submission_id;
-      console.log('Submission ID:', submissionId);
+      const submissionID= await submit(codeSubmission); 
+      console.log('Submission ID:', submissionID);
+
     } catch (error) {
       console.error('Error submitting code:', error);
     } finally {
@@ -147,4 +113,4 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ selectedquestionId }) => {
   );
 };
 
-export default CodeEditor;
+

@@ -50,9 +50,9 @@ interface SelectLanguagesProps {
 export default function SelectLanguages({ onChange }: SelectLanguagesProps) {
   const [selected, setSelected] = useState(languages[0]); // Default to Python
 
-  const handleChange = (person: typeof languages[0]) => {
-    setSelected(person);
-    onChange(person.id); // Pass the selected language ID to the parent
+  const handleChange = (language: typeof languages[0]) => {
+    setSelected(language);
+    onChange(language.id); // Pass the selected language ID to the parent
   };
 
   return (
@@ -62,7 +62,7 @@ export default function SelectLanguages({ onChange }: SelectLanguagesProps) {
           <span className="flex items-center">
             {selected?.avatar && <Image 
               alt="Selected language"
-              src={selected?.avatar} 
+              src={selected.avatar} 
               className="h-5 w-5 flex-shrink-0 rounded-full" 
               width={20} 
               height={20} 
@@ -79,22 +79,22 @@ export default function SelectLanguages({ onChange }: SelectLanguagesProps) {
           transition
           className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         >
-          {languages.map((person) => (
+          {languages.map((language) => (
             <ListboxOption
-              key={person.id}
-              value={person}
+              key={language.id}
+              value={language}
               className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
             >
               <div className="flex items-center">
                 <Image 
-                  alt={person.name} 
-                  src={person.avatar} 
+                  alt={language.name} 
+                  src={language.avatar} 
                   className="h-5 w-5 flex-shrink-0 rounded-full" 
                   width={20} 
                   height={20} 
                 />
                 <span className="ml-3 block truncate font-normal group-data-[selected]:font-semibold">
-                  {person.name}
+                  {language.name}
                 </span>
               </div>
 
