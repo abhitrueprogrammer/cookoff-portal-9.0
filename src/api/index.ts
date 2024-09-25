@@ -27,6 +27,12 @@ api.interceptors.response.use(
     const error = err as AxiosError;
     const originalRequest = error.config as CustomAxiosRequestConfig;
 
+    if (!error.response) {
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 2000);
+    }
+
     // If the error status is 401 and there is no originalRequest._retry flag,
     // it means the token has expired and we need to refresh it
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -35,6 +41,7 @@ api.interceptors.response.use(
       try {
         await axios.post<ApiResponse>(
           `${process.env.NEXT_PUBLIC_CLIENTVAR}/token/refresh`,
+          {},
           {
             withCredentials: true,
           },

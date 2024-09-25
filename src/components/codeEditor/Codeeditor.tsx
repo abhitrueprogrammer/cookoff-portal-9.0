@@ -1,12 +1,10 @@
-import api from '@/api';
-import { CodeEditorProps, CodeSubmission, SubmissionResponse } from '@/schemas/api';
+import { type CodeEditorProps, type CodeSubmission } from '@/schemas/api';
 import Editor, { type OnMount } from '@monaco-editor/react';
 import type * as monaco from 'monaco-editor';
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SelectLanguages from '../ui/SelectLanguages';
 import boilerplates from '@/data/boilerplates.json'; // Import the boilerplates JSON file
 import { submit } from '@/api/submit';
-import { set } from 'zod';
 
 export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
   
@@ -26,7 +24,7 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
     const savedLanguageId = localStorage.getItem(localStorageLanguageKey);
     if (savedLanguageId) {
       setLanguageId(parseInt(savedLanguageId));
-      setSourceCode((boilerplates as Record<string, string>)[savedLanguageId.toString()] || boilerplates["71"]);
+      setSourceCode((boilerplates as Record<string, string>)[savedLanguageId.toString()] ?? boilerplates["71"]);
     }
     else{
       setLanguageId(71);
@@ -39,7 +37,7 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
     if (savedCode) {
       setSourceCode(savedCode);
     }
-   }, [selectedquestionId]);
+   }, [localStorageCodeKey, localStorageLanguageKey, selectedquestionId]);
 
 
 
@@ -51,7 +49,7 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
 
     if (savedLanguageId) {
       setLanguageId(parseInt(savedLanguageId));
-      setSourceCode((boilerplates as Record<string, string>)[savedLanguageId.toString()] || boilerplates["71"]); // Load corresponding boilerplate
+      setSourceCode((boilerplates as Record<string, string>)[savedLanguageId.toString()] ?? boilerplates["71"]); // Load corresponding boilerplate
     }
     else{
       setLanguageId(71);
@@ -66,7 +64,7 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
     if (savedCode) {
       setSourceCode(savedCode);
     }
-  }, [questionId, localStorageCodeKey, localStorageLanguageKey]);
+  }, [questionId, localStorageCodeKey, localStorageLanguageKey, selectedquestionId]);
 
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
@@ -83,7 +81,7 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
   // Handle language change and save to localStorage
   const handleLanguageChange = (id: number) => {
     setLanguageId(id);
-    setSourceCode((boilerplates as Record<string, string>)[id.toString()] || boilerplates["71"]); // Load the boilerplate for the new language
+    setSourceCode((boilerplates as Record<string, string>)[id.toString()] ?? boilerplates["71"]); // Load the boilerplate for the new language
     localStorage.setItem(localStorageLanguageKey, id.toString()); // Save selected language for this question
   };
 

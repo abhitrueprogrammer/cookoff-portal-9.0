@@ -1,5 +1,5 @@
 import { handleAPIError } from "@/lib/error";
-import { dashboard, type ApiResponse } from "@/schemas/api";
+import { type dashboard, type ApiResponse } from "@/schemas/api";
 import api from ".";
 
 export async function me() {

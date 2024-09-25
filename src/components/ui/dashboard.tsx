@@ -1,6 +1,6 @@
 import { me } from "@/api/me";
-import { dashboard, type profileData } from "@/schemas/api";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { type dashboard, type profileData } from "@/schemas/api";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 
 export default function Component({
   setProfile,
@@ -11,6 +11,8 @@ export default function Component({
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -27,8 +29,8 @@ export default function Component({
       }
       setLoading(false);
     }
-    fetchData();
-  }, []);
+    void fetchData();
+  }, [setProfile]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
@@ -55,30 +57,29 @@ export default function Component({
 
                 {/* Questions for the current round */}
                 <div className="mt-4 flex flex-col gap-4">
-                  {roundSubmissions &&
-                    roundSubmissions.map((problem, i) => (
-                      <div
-                        key={i}
-                        className="rounded-md bg-[#1F1F1F] px-6 py-4 shadow-md transition-shadow duration-200 hover:shadow-lg"
-                      >
-                        <div className="text-md font-mono text-[#F14A16]">
-                          {problem.title}
-                        </div>
+                  {roundSubmissions?.map((problem, i) => (
+                    <div
+                      key={i}
+                      className="rounded-md bg-[#1F1F1F] px-6 py-4 shadow-md transition-shadow duration-200 hover:shadow-lg"
+                    >
+                      <div className="text-md font-mono text-[#F14A16]">
+                        {problem.title}
+                      </div>
 
-                        {/* Description */}
-                        <div className="flex-cols flex gap-10">
-                          <p className="text-md text-[#B7AB98]">
-                            {problem.description &&
-                            problem.description.length > 50
-                              ? `${problem.description.substring(0, 50)}...`
-                              : problem.description}
-                          </p>
-                          <div className="text-md text-[#B7AB98]">
-                            {"Your Score is:  " + problem.score}/10
-                          </div>
+                      {/* Description */}
+                      <div className="flex-cols flex gap-10">
+                        <p className="text-md text-[#B7AB98]">
+                          {problem.description &&
+                          problem.description.length > 50
+                            ? `${problem.description.substring(0, 50)}...`
+                            : problem.description}
+                        </p>
+                        <div className="text-md text-[#B7AB98]">
+                          {"Your Score is:  " + problem.score}/10
                         </div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
                 </div>
               </div>
             );

@@ -1,4 +1,4 @@
-import { CodeSubmission, SubmissionResponse } from "@/schemas/api";
+import { type CodeSubmission, type SubmissionResponse } from "@/schemas/api";
 import api from ".";
 import { handleAPIError } from "@/lib/error";
 

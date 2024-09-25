@@ -1,9 +1,7 @@
 "use client";
 import Image from 'next/image';
 import check from "@/assets/images/check.png";
-import ChangeDevice from '../../components/changeDevice/ChangeDevice';
 import NavBar from '../../components/navBar/NavBar';
-import styles from "./test-complete.module.css";
 
 export default function TestComplete() {
     return (

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import EditorWindow from "@/components/editorwindow/EditorWindow";
 import QuesNavbar from "@/components/quesNavBar";
 import Question from "@/components/question";
@@ -8,8 +8,7 @@ export default function HomePage() {
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
 
   const handleSelectedQuestionId = (id: string) => {
-    setSelectedQuestionId(id); 
-     
+    setSelectedQuestionId(id);
   };
 
   return (

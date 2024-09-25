@@ -1,7 +1,6 @@
 import React from 'react'
 import acc from "@/assets/images/acc.png"
 import Image from 'next/image';
-import styles from "./navBar.module.css"
 
 export default function NavBar() {
     return (

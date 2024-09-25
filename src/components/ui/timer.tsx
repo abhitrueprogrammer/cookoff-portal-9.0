@@ -48,7 +48,7 @@ const Timer = () => {
 
       return () => clearInterval(interval);
     }
-  }, [expiryTime]);
+  }, [expiryTime, pathname]);
 
   return (
     <div className="m-4 border-2 border-cream p-2 text-center text-accent">

@@ -42,3 +42,14 @@ export interface profileData {
   score: number;
   username: string;
 }
+
+export interface Question {
+  ID: string;
+  Description: string;
+  Title: string;
+  InputFormat: string;
+  Points: number;
+  Round: number;
+  Constraints: string;
+  OutputFormat: string;
+}
