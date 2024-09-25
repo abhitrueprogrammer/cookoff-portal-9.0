@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Question from "@/components/question";
 import EditorWindow from "@/components/editorwindow/EditorWindow";
@@ -8,7 +10,7 @@ export default function HomePage() {
 
   const handleSelectedQuestionId = (id: string) => {
     setSelectedQuestionId(id); 
-    console.log("Selected Question ID:", id); 
+     
   };
 
   return (
@@ -16,7 +18,7 @@ export default function HomePage() {
       <QuesNavbar />
       <div className="flex bg-dark2">
         <Question onQuestionSelect={handleSelectedQuestionId} />
-        <EditorWindow />
+        <EditorWindow selectedQuestionId={selectedQuestionId} />
       </div>
     </main>
   );
