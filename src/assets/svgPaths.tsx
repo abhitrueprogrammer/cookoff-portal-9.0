@@ -19,7 +19,7 @@ export const ProfileBackgroundSVG: React.FC<React.SVGProps<SVGSVGElement>> = (pr
 );
 
 export const ProfileHeaderSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg width="352" height="61" viewBox="0 0 352 61" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg width="350" height="61" viewBox="0 0 352 61" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
         <path d="M48 0H352V61H0V47L48 0Z" fill="black" stroke="white" strokeWidth="1" />
     </svg>
 );

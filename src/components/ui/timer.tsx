@@ -1,7 +1,6 @@
 "use client";
-
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
 interface TimeCount {
   hours: string;
   minutes: string;
@@ -35,16 +34,21 @@ const Timer = () => {
   const timerDuration = 1 * 25 * 60;
 
   const [expiryTime] = useState(new Date().getTime() + timerDuration * 1000);
-
+  const pathname = usePathname();
   const [timeLeft, setTimeLeft] = useState<TimeCount>(getTimeLeft(expiryTime));
-
+  const router = useRouter();
   useEffect(() => {
+    if (pathname === "/dashboard") {
+      setTimeLeft({ hours: "00", minutes: "00", seconds: "00" });
+      return;
+    }
+    else{
     const interval = setInterval(() => {
       setTimeLeft(getTimeLeft(expiryTime));
     }, 1000);
     
     return () => clearInterval(interval);
-  }, [expiryTime]);
+}}, [expiryTime]);
 
   return (
     <div className="p-2 m-4 text-accent border-2 border-cream text-center">

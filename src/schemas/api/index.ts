@@ -8,3 +8,20 @@ export interface User {
   score: number | null;
   username: string;
 }
+
+export interface Submission {
+  title: string;
+  description: string | null;
+  score: number;
+}
+export interface dashboard {
+  round: number;
+  score: number;
+  submissions: Record<string, Submission[]>;
+  username: string;
+}
+
+export interface APIResponse {
+  message: string;
+  data: dashboard;
+}

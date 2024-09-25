@@ -1,7 +1,8 @@
-import { useState } from "react";
-import Question from "@/components/question";
+"use client"
 import EditorWindow from "@/components/editorwindow/EditorWindow";
 import QuesNavbar from "@/components/quesNavBar";
+import Question from "@/components/question";
+import { useState } from "react";
 
 export default function HomePage() {
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
