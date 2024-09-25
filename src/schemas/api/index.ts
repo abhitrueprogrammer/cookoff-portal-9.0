@@ -25,3 +25,9 @@ export interface APIResponse {
   message: string;
   data: dashboard;
 }
+
+export interface profileData {
+  round: number;
+  score: number;
+  username: string;
+}

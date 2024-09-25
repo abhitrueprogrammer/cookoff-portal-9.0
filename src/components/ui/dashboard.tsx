@@ -1,20 +1,27 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import api from "@/api";
-import {User,dashboard,Submission,APIResponse} from "@/schemas/api";
 import { me } from "@/api/me";
+import { dashboard, type profileData } from "@/schemas/api";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export default function Component() {
+export default function Component({
+  setProfile,
+}: {
+  setProfile: Dispatch<SetStateAction<profileData | undefined>>;
+}) {
   const [data, setData] = useState<dashboard>();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
-    
     async function fetchData() {
       setLoading(true);
       try {
         const data = await me();
         setData(data);
+        setProfile({
+          username: data.username,
+          round: data.round,
+          score: data.score,
+        });
       } catch {
         setError(true);
       }
@@ -27,9 +34,9 @@ export default function Component() {
   if (error) return <div>Error</div>;
 
   return (
-    <div className="flex flex-grow roboto relative ml-16 w-[60vw] font-sans text-white">
+    <div className="roboto relative ml-16 flex w-[60vw] flex-grow font-sans text-white">
       {/* Main Container */}
-      <div className="flex-grow left-6 right-6 flex flex-col gap-6">
+      <div className="left-6 right-6 flex flex-grow flex-col gap-6">
         {/* Loop through each round */}
         {data &&
           Object.keys(data.submissions).map((roundKey, i) => {
@@ -37,10 +44,10 @@ export default function Component() {
             return (
               <div
                 key={i}
-                className="flex-grow relative rounded-lg bg-[#2C2C2C] p-6 pt-0 shadow-lg h-32 overflow-auto"
+                className="relative h-32 flex-grow overflow-auto rounded-lg bg-[#2C2C2C] p-6 pt-0 shadow-lg"
               >
                 {/* Round Header */}
-                <div className=" pt-6 sticky top-0 backdrop-blur flex items-center justify-between">
+                <div className="sticky top-0 flex items-center justify-between pt-6 backdrop-blur">
                   <h2 className="font-mono text-3xl font-bold tracking-wider text-[#F14A16]">
                     ROUND {roundKey}
                   </h2>
@@ -67,7 +74,7 @@ export default function Component() {
                               : problem.description}
                           </p>
                           <div className="text-md text-[#B7AB98]">
-                            {"Your Score is:  "+problem.score}/10
+                            {"Your Score is:  " + problem.score}/10
                           </div>
                         </div>
                       </div>
