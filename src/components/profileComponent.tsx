@@ -4,7 +4,11 @@ import { type profileData } from "@/schemas/api";
 import { ProfileHeaderSVG, ProfileIconSVG } from "../assets/svgPaths";
 // Simulated API response object
 
-export default function Component({ profile }: { profile: profileData|undefined }) {
+export default function Component({
+  profile,
+}: {
+  profile: profileData | undefined;
+}) {
   return (
     <div className="roboto relative my-auto max-h-full">
       {/* Background shape with white border */}
@@ -28,13 +32,13 @@ export default function Component({ profile }: { profile: profileData|undefined 
         {/* Input fields */}
         <div className="mt-9 w-full space-y-9 px-4">
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {profile?.username ??""}
+            {profile?.username ?? ""}
           </div>
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {profile?.round??0}
+            {profile?.round ?? 0}
           </div>
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {profile?.score ??0}
+            {profile?.score ?? 0}
           </div>
         </div>
       </div>
