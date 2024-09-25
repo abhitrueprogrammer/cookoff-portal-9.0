@@ -3,7 +3,7 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const languages = [
   {
@@ -45,10 +45,19 @@ const languages = [
 
 interface SelectLanguagesProps {
   onChange: (id: number) => void;
+  value: number; // Added value prop to accept selected language ID from parent
 }
 
-export default function SelectLanguages({ onChange }: SelectLanguagesProps) {
+export default function SelectLanguages({ onChange, value }: SelectLanguagesProps) {
   const [selected, setSelected] = useState(languages[0]); // Default to Python
+
+  // Sync the local selected state when the value prop changes
+  useEffect(() => {
+    const selectedLanguage = languages.find(lang => lang.id === value);
+    if (selectedLanguage) {
+      setSelected(selectedLanguage);
+    }
+  }, [value]);
 
   const handleChange = (language: typeof languages[0]) => {
     setSelected(language);

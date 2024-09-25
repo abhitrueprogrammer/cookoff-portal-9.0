@@ -6,25 +6,67 @@ import { use, useEffect, useRef, useState } from 'react';
 import SelectLanguages from '../ui/SelectLanguages';
 import boilerplates from '@/data/boilerplates.json'; // Import the boilerplates JSON file
 import { submit } from '@/api/submit';
+import { set } from 'zod';
 
 export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
+  
   const [sourceCode, setSourceCode] = useState(boilerplates["71"]); // Default to Python
   const [languageId, setLanguageId] = useState(71); // Default to Python
   const questionId = selectedquestionId; // Use selectedquestionId directly
-  
+
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // State for button submission
 
-  const localStorageKey = `code-${questionId}-${languageId}`;
+  const localStorageCodeKey = `code-${questionId}-${languageId}`;
+  const localStorageLanguageKey = `language-${questionId}`;
 
-  useEffect(() => {
-    const savedCode = localStorage.getItem(localStorageKey);
+  useEffect(() =>
+   {
+    
+    const savedLanguageId = localStorage.getItem(localStorageLanguageKey);
+    if (savedLanguageId) {
+      setLanguageId(parseInt(savedLanguageId));
+      setSourceCode((boilerplates as Record<string, string>)[savedLanguageId.toString()] || boilerplates["71"]);
+    }
+    else{
+      setLanguageId(71);
+      localStorage.setItem(`language-${selectedquestionId}`, "71");
+      
+      setSourceCode(boilerplates["71"]);
+      localStorage.setItem(`code-${selectedquestionId}-71`, boilerplates["71"]);
+    }
+    const savedCode = localStorage.getItem(localStorageCodeKey);
     if (savedCode) {
       setSourceCode(savedCode);
     }
-  }, [localStorageKey]);
+   }, [selectedquestionId]);
 
 
+
+  // Load saved code and language from localStorage
+  useEffect(() => {
+
+    // Retrieve saved language for this question
+    const savedLanguageId = localStorage.getItem(localStorageLanguageKey);
+
+    if (savedLanguageId) {
+      setLanguageId(parseInt(savedLanguageId));
+      setSourceCode((boilerplates as Record<string, string>)[savedLanguageId.toString()] || boilerplates["71"]); // Load corresponding boilerplate
+    }
+    else{
+      setLanguageId(71);
+      localStorage.setItem(`language-${selectedquestionId}`, "71");
+      
+      setSourceCode(boilerplates["71"]);
+      localStorage.setItem(`code-${selectedquestionId}-71`, boilerplates["71"]);
+    }
+
+    // Retrieve saved code for this language and question
+    const savedCode = localStorage.getItem(localStorageCodeKey);
+    if (savedCode) {
+      setSourceCode(savedCode);
+    }
+  }, [questionId, localStorageCodeKey, localStorageLanguageKey]);
 
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
@@ -34,14 +76,15 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
   function handleOnChange(value: string | undefined) {
     if (value) {
       setSourceCode(value);
-      localStorage.setItem(localStorageKey, value);
+      localStorage.setItem(localStorageCodeKey, value);
     }
   }
 
-  // Dynamically change language and retrieve boilerplate from JSON file
+  // Handle language change and save to localStorage
   const handleLanguageChange = (id: number) => {
     setLanguageId(id);
-    setSourceCode((boilerplates as Record<string, string>)[id.toString()] || boilerplates["71"]); // Cast to Record<string, string>
+    setSourceCode((boilerplates as Record<string, string>)[id.toString()] || boilerplates["71"]); // Load the boilerplate for the new language
+    localStorage.setItem(localStorageLanguageKey, id.toString()); // Save selected language for this question
   };
 
   async function handleSubmitCode() {
@@ -54,7 +97,7 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
     try {
       setIsSubmitting(true); // Set submitting state to true
 
-      const submissionID= await submit(codeSubmission); 
+      const submissionID = await submit(codeSubmission); 
       console.log('Submission ID:', submissionID);
 
     } catch (error) {
@@ -70,7 +113,8 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
         <div className="flex items-center text-white text-xl mb-4">
           Languages:
           <div className="w-[150px]">
-            <SelectLanguages onChange={handleLanguageChange} />
+            {/* Pass the selected languageId as the value prop to SelectLanguages */}
+            <SelectLanguages value={languageId} onChange={handleLanguageChange} />
           </div>
         </div>
 
@@ -100,7 +144,7 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
               Run Code
             </button>
             <button
-              className={`py-2 rounded text-white ${isSubmitting ? 'bg-gray-500' : 'bg-orange-600'} w-28`} // Set a constant width using w-40
+              className={`py-2 rounded text-white ${isSubmitting ? 'bg-gray-500' : 'bg-orange-600'} w-28`}
               onClick={handleSubmitCode}
               disabled={isSubmitting} // Disable button while submitting
             >
@@ -112,5 +156,3 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
     </div>
   );
 };
-
-
