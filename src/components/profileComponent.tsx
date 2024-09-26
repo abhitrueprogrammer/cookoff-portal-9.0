@@ -1,14 +1,17 @@
 "use client";
 
+import chefhat from "@/assets/images/Chefhat.svg";
 import { type profileData } from "@/schemas/api";
-import { ProfileHeaderSVG, ProfileIconSVG } from "../assets/svgPaths";
-// Simulated API response object
-
+import Image from "next/image";
+import { useRouter } from "next/navigation"; // Import useRouter
+import { ProfileHeaderSVG } from "../assets/svgPaths";
 export default function Component({
   profile,
 }: {
   profile: profileData | undefined;
 }) {
+  const router = useRouter(); // Initialize router
+
   return (
     <div className="roboto relative my-auto max-h-full">
       {/* Background shape with white border */}
@@ -25,20 +28,33 @@ export default function Component({
         </div>
 
         {/* Profile picture placeholder */}
-        <div className="group mt-8 flex h-[146px] w-[149px] items-center justify-center overflow-hidden rounded-full bg-[#2F2F2F]">
-          <ProfileIconSVG className="group-hover:rotate-360 transition-transform duration-500 ease-in-out" />
-        </div>
-
+        <Image
+        className="mt-10"
+              src={chefhat as HTMLImageElement}
+              alt="chef hat"
+              width={1000}
+              height={400}
+          />
         {/* Input fields */}
-        <div className="mt-9 w-full space-y-9 px-4">
+        <div className="mt-9 w-full space-y-9 px-4 font-mono font-bold ">
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {profile?.username ?? ""}
+            {"Name: " + profile?.username ?? ""}
           </div>
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {profile?.round ?? 0}
+            {"Round: " + profile?.round ?? 0}
           </div>
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {profile?.score ?? 0}
+            {"Score: " + profile?.score ?? 0}
+          </div>
+          
+          {/* Button for navigation */}
+          <div className="flex justify-center">
+            <button
+              onClick={() => router.push("/")} // Navigate to root route
+              className="mt-4 rounded-lg bg-[#F14A16] px-6 py-3 text-white hover:bg-[#d13e14] transition-colors font-mono font-bold w-full "
+            >
+              Start Cooking
+            </button>
           </div>
         </div>
       </div>
