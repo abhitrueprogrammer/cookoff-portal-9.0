@@ -1,6 +1,6 @@
 import { me } from "@/api/me";
 import { type dashboard, type profileData } from "@/schemas/api";
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 
 export default function Component({
   setProfile,
@@ -12,7 +12,6 @@ export default function Component({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -35,12 +34,13 @@ export default function Component({
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
+  const hasRounds = data && Object.keys(data.submissions).length > 0;
+
   return (
     <div className="roboto relative ml-16 flex w-[60vw] flex-grow font-sans text-white">
       {/* Main Container */}
       <div className="left-6 right-6 flex flex-grow flex-col gap-6">
-        {/* Loop through each round */}
-        {data &&
+        {hasRounds ? (
           Object.keys(data.submissions).map((roundKey, i) => {
             const roundSubmissions = data.submissions[roundKey];
             return (
@@ -83,7 +83,12 @@ export default function Component({
                 </div>
               </div>
             );
-          })}
+          })
+        ) : (
+          <div className="flex justify-center items-center h-full text-5xl text-[#B7AB98] s-sling font-bold">
+            Wait for the Round to Start
+          </div>
+        )}
       </div>
     </div>
   );
