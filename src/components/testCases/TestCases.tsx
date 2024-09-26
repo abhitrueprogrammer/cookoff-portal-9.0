@@ -32,6 +32,7 @@ interface testCaseResult {
 export default function TestCases({ codeData }: testCaseProps) {
   const [allPassed, setAllPassed] = useState(false);
   const [currentTestCase, setcurrentTestCase] = useState(0);
+  // const [isClicked, setIsClicked] = useState(true);
   function handleTestClick(testKaKey: number) {
     setcurrentTestCase(testKaKey);
     console.log(testKaKey);
@@ -82,7 +83,7 @@ export default function TestCases({ codeData }: testCaseProps) {
                       handleTestClick(index);
                     }}
                   >
-                    <TestComp
+                    <TestComp isClicked={currentTestCase===index? true : false}
                       key={index}
                       isPassed={
                         item.status.description === "Accepted" ? true : false
