@@ -5,12 +5,29 @@ import { useEffect, useRef, useState } from 'react';
 import SelectLanguages from '../ui/SelectLanguages';
 import boilerplates from '@/data/boilerplates.json'; // Import the boilerplates JSON file
 import { submit } from '@/api/submit';
+import { Languages } from 'lucide-react';
 
-export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
+
+interface runCodeInterface {
+  source_code: string;
+  language_id: number;
+  question_id: string;
+}
+
+
+interface ChildComponentProps {
+  handleRun: (data: runCodeInterface) => void; 
+  isRunClicked: boolean;
+  selectedquestionId: string;
+}
+
+export default function Codeeditor({ handleRun, isRunClicked, selectedquestionId }: ChildComponentProps) {
+
   
   const [sourceCode, setSourceCode] = useState(boilerplates["71"]); // Default to Python
   const [languageId, setLanguageId] = useState(71); // Default to Python
   const questionId = selectedquestionId; // Use selectedquestionId directly
+  
 
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // State for button submission
@@ -86,10 +103,12 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
   };
 
   async function handleSubmitCode() {
+    console.log(selectedquestionId)
+    
     const codeSubmission: CodeSubmission = {
       source_code: sourceCode,
       language_id: languageId,
-      question_id: questionId, // Use the updated questionId from prop
+      question_id: selectedquestionId, // Use the updated questionId from prop
     };
 
     try {
@@ -105,10 +124,17 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
     }
   }
 
+  const runCodeParams: runCodeInterface = {
+    source_code: sourceCode,
+    language_id: languageId,
+    question_id: selectedquestionId
+  };
+
   return (
-    <div className="h-full flex justify-center items-center bg-[#131313]">
-      <div className="w-full max-w-4xl p-4 mt-[-80px]">
-        <div className="flex items-center text-white text-xl mb-4">
+    <div className=" flex justify-center items-center bg-[#131313]">
+      <div className="w-full max-w-4xl p-4 ">
+
+        <div className="flex items-center text-white text-xl mb-4 ">
           Languages:
           <div className="w-[150px]">
             {/* Pass the selected languageId as the value prop to SelectLanguages */}
@@ -138,8 +164,19 @@ export default function CodeEditor({ selectedquestionId }: CodeEditorProps) {
           </label>
 
           <div className="flex mt-4 space-x-4 justify-end w-full">
-            <button className="py-2 px-4 rounded bg-gray-800 text-white">
-              Run Code
+            <button onClick={() => {
+              console.log(runCodeParams)
+              handleRun(runCodeParams);
+
+              // console.log(runCodeParams)
+            }
+            }
+              className="py-2 px-4 rounded text-white disabled:text-[#ffffff85] bg-[#242424] disabled:bg-[#24242488]"
+              disabled={isRunClicked}
+              
+            >
+              {isRunClicked?"Cooking...":"Cook"}
+              
             </button>
             <button
               className={`py-2 rounded text-white ${isSubmitting ? 'bg-gray-500' : 'bg-orange-600'} w-28`}

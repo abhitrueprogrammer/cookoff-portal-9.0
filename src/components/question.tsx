@@ -35,6 +35,8 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         setQuestions(fetchedQuestions);
         if (fetchedQuestions[0]) {
           setSelectedQuestionId(fetchedQuestions[0].ID);
+          console.log(fetchedQuestions[0].ID)
+          onQuestionSelect(fetchedQuestions[0].ID)
           setSelectedQuestionIndex(0);
           setSelectedQuestion(fetchedQuestions[0]);
         }
