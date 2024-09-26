@@ -7,7 +7,10 @@ import { useState } from "react";
 export default function HomePage() {
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
 
+
+
   const handleSelectedQuestionId = (id: string) => {
+    console.log(id)
     setSelectedQuestionId(id);
   };
 
