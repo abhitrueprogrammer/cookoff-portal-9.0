@@ -1,6 +1,6 @@
 "use client";
 
-import chefhat from "@/assets/images/Chefhat.svg";
+import chefhat from "@/assets/images/chefshat.svg";
 import { type profileData } from "@/schemas/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Import useRouter
@@ -41,17 +41,17 @@ export default function Component({
             {"Name: " + profile?.username ?? ""}
           </div>
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {"Round: " + profile?.round ?? 0}
+            {"Round: " + profile?.round ?? "Nothing yet."}
           </div>
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {"Score: " + profile?.score ?? 0}
+            {"Score: " + profile?.score ?? "Nothing yet."}
           </div>
           
           {/* Button for navigation */}
           <div className="flex justify-center">
             <button
               onClick={() => router.push("/")} // Navigate to root route
-              className="mt-4 rounded-lg bg-[#F14A16] px-6 py-3 text-white hover:bg-[#d13e14] transition-colors font-mono font-bold w-full "
+              className="mt-4 rounded-lg bg-[#F14A16] px-6 py-3 text-white hover:bg-[#d13e14] transition-colors s-sling w-full "
             >
               Start Cooking
             </button>

@@ -1,17 +1,16 @@
 "use client";
+import NavBar from "@/components/navBar/NavBar";
 import ProfileComponent from "@/components/profileComponent";
-import QuesNavbar from "@/components/quesNavBar";
 import DashboardComponent from "@/components/ui/dashboard";
 import { type profileData } from "@/schemas/api";
 import { useState } from "react";
-
 const Dashboard = () => {
   const [profile, setProfile] = useState<profileData>();
   return (
     <>
       <div className="flex h-screen flex-col justify-between bg-zinc-900">
         {/* Navbar */}
-        <QuesNavbar />
+        <NavBar />
 
         {/* Main content area */}
         <div className="flex h-full">
