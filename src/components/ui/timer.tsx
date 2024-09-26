@@ -1,5 +1,4 @@
 "use client";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 interface TimeCount {
   hours: string;
@@ -34,16 +33,14 @@ const Timer = () => {
   const timerDuration = 1 * 25 * 60;
 
   const [expiryTime] = useState(new Date().getTime() + timerDuration * 1000);
-  const pathname = usePathname();
   const [timeLeft, setTimeLeft] = useState<TimeCount>(getTimeLeft(expiryTime));
 
   useEffect(() => {
-      const interval = setInterval(() => {
-        setTimeLeft(getTimeLeft(expiryTime));
-      }, 1000);
+    const interval = setInterval(() => {
+      setTimeLeft(getTimeLeft(expiryTime));
+    }, 1000);
 
-      return () => clearInterval(interval);
-    
+    return () => clearInterval(interval);
   }, [expiryTime]);
 
   return (

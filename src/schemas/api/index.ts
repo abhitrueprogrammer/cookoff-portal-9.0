@@ -17,7 +17,7 @@ export interface SubmissionResponse {
   submission_id: string;
 }
 export interface CodeEditorProps {
-  selectedquestionId: string; 
+  selectedquestionId: string;
 }
 
 export interface Submission {
@@ -47,9 +47,12 @@ export interface Question {
   ID: string;
   Description: string;
   Title: string;
-  InputFormat: string;
+  InputFormat: string[];
   Points: number;
   Round: number;
-  Constraints: string;
-  OutputFormat: string;
+  Constraints: string[];
+  OutputFormat: string[];
+  SampleTestInput: string[];
+  SampleTestOutput: string[];
+  Explanation: string[];
 }

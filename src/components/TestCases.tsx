@@ -1,5 +1,5 @@
 "use client";
-import TestComp from "../TestComp";
+import TestComp from "@/components/TestComp";
 import React, { useState, useEffect } from "react";
 import lock from "@/assets/images/lock.png";
 import Image from "next/image";
@@ -83,7 +83,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                       handleTestClick(index);
                     }}
                   >
-                    <TestComp isClicked={currentTestCase===index? true : false}
+                    <TestComp
+                      isClicked={currentTestCase === index ? true : false}
                       key={index}
                       isPassed={
                         item.status.description === "Accepted" ? true : false
@@ -107,13 +108,15 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div
                     className={`${codeData.result[currentTestCase]?.status.description === "Accepted" ? "text-green2" : "text-accent"} my-2 rounded bg-lightGray px-4 py-1 text-xs`}
                   >
-                    {codeData.result[currentTestCase]?.status.description }
+                    {codeData.result[currentTestCase]?.status.description}
                   </div>
                 </div>
                 <div className="my-2">
                   <div className="text-base">Output</div>
                   <div className="my-2 rounded bg-lightGray px-4 py-1 text-xs">
-                    {codeData.result[currentTestCase]?.stdout? codeData.result[currentTestCase]?.stdout:"-"}
+                    {codeData.result[currentTestCase]?.stdout
+                      ? codeData.result[currentTestCase]?.stdout
+                      : "-"}
                   </div>
                 </div>
                 <div className="my-2">
