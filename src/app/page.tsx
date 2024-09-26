@@ -1,5 +1,5 @@
 "use client";
-import EditorWindow from "@/components/editorwindow/EditorWindow";
+import EditorWindow from "@/components/EditorWindow";
 import QuesNavbar from "@/components/quesNavBar";
 import Question from "@/components/question";
 import { useState } from "react";

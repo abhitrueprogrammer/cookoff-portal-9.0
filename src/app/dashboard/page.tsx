@@ -1,5 +1,5 @@
 "use client";
-import NavBar from "@/components/navBar/NavBar";
+import NavBar from "@/components/NavBar";
 import ProfileComponent from "@/components/profileComponent";
 import DashboardComponent from "@/components/ui/dashboard";
 import { type profileData } from "@/schemas/api";

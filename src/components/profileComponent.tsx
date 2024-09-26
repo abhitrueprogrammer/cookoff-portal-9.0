@@ -4,7 +4,7 @@ import chefhat from "@/assets/images/chefshat.svg";
 import { type profileData } from "@/schemas/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Import useRouter
-import { ProfileHeaderSVG } from "../assets/svgPaths";
+import { ProfileHeaderSVG } from "@/assets/svgPaths";
 export default function Component({
   profile,
 }: {
@@ -29,14 +29,14 @@ export default function Component({
 
         {/* Profile picture placeholder */}
         <Image
-        className="mt-10"
-              src={chefhat as HTMLImageElement}
-              alt="chef hat"
-              width={1000}
-              height={400}
-          />
+          className="mt-10"
+          src={chefhat as HTMLImageElement}
+          alt="chef hat"
+          width={1000}
+          height={400}
+        />
         {/* Input fields */}
-        <div className="mt-9 w-full space-y-9 px-4 font-mono font-bold ">
+        <div className="mt-9 w-full space-y-9 px-4 font-mono font-bold">
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
             {"Name: " + profile?.username ?? ""}
           </div>
@@ -46,12 +46,12 @@ export default function Component({
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
             {"Score: " + profile?.score ?? "Nothing yet."}
           </div>
-          
+
           {/* Button for navigation */}
           <div className="flex justify-center">
             <button
               onClick={() => router.push("/")} // Navigate to root route
-              className="mt-4 rounded-lg bg-[#F14A16] px-6 py-3 text-white hover:bg-[#d13e14] transition-colors s-sling w-full "
+              className="s-sling mt-4 w-full rounded-lg bg-[#F14A16] px-6 py-3 text-white transition-colors hover:bg-[#d13e14]"
             >
               Start Cooking
             </button>
