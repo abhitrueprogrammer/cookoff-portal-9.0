@@ -3,6 +3,7 @@
 
 import { byRound } from "@/api/question";
 import { type Question } from "@/schemas/api";
+import { ApiError } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
@@ -48,6 +49,11 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
           setSelectedQuestion(fetchedQuestions[0]);
         }
       } catch (err) {
+        if (err instanceof ApiError && err.statusCode === 401) {
+          console.error("Error fetching questions:", err);
+          router.push("/login");
+          return;
+        }
         console.error("Error fetching questions:", err);
         router.push("/dashboard");
       }
@@ -57,7 +63,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
   }, [router]);
 
   return (
-    <div className="flex h-[83vh] 2xl:h-[86vh] w-[45%] flex-row overflow-y-scroll bg-gray1">
+    <div className="flex h-[83vh] w-[45%] flex-row overflow-y-scroll bg-gray1 2xl:h-[86vh]">
       <div className="sticky top-0 flex flex-col text-white">
         {questions.map((question, index) => (
           <button
