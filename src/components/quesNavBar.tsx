@@ -1,17 +1,26 @@
+"use client";
+
 import React from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Timer from "./ui/timer";
 import sululogo from "@/assets/sulu.svg";
 import Judgelogo from "@/assets/judge.svg";
+import { useRouter } from "next/navigation";
 
-const QuesNavbar: React.FC = () => {
+export default function QuesNavbar() {
   const path = usePathname();
+  const router = useRouter();
+
+  const handleendtest = () => {
+    localStorage.clear();
+    router.push("/test-complete");
+  };
 
   return (
-    <div className="flex h-[17vh] 2xl:h-[14vh] w-full flex-row items-center justify-around border-b-2 border-cream bg-black">
+    <div className="flex h-[17vh] 2xl:h-[14vh] w-screen flex-row items-center justify-between border-b-2 border-cream bg-black">
       <div>{path !== "/dashboard" && <Timer />}</div>
-      <div className="relative text-6xl">
+      <div className="relative text-6xl ">
         <span className="s-sling mr-8 text-cream">COOK</span>
         <span className="s-sling mr-8 text-accent">OFF</span>
         <span className="s-sling text-cream">9.0</span>
@@ -37,10 +46,18 @@ const QuesNavbar: React.FC = () => {
             style={{ marginTop: "-2px" }}
           />
         </div>
+        
       </div>
+      <div >
+        <button
+          onClick={handleendtest}
+          className="rounded-md  bg-dark2 p-2 px-7 text-xl s-sling  hover:bg-accent text-cream hover:text-black"
+        >
+          End Test
+        </button>
+      </div>
+      
       <div></div>
     </div>
   );
-};
-
-export default QuesNavbar;
+}
