@@ -75,7 +75,7 @@ export default function Component({
                             : problem.description}
                         </p>
                         <div className="text-md text-[#B7AB98]">
-                          {"Your Score is:  " + problem.score}/10
+                          {"Your Score is:  " + problem.score+"/"+problem.max_score}
                         </div>
                       </div>
                     </div>
