@@ -151,15 +151,13 @@ export default function CodeEditor({
       setIsSubmitting(true);
       setisRunClicked(true);
       setlatestClicked("submit");
-      setLastSubmittedQuestionId(selectedquestionId);
+      
 
       const submissionId = await submit(codeSubmission);
       console.log("Submission ID:", submissionId);
 
       const response = await submission(submissionId);
-      if (selectedquestionId === lastSubmittedQuestionId) {
-        setTaskResult(response);
-      }
+      setTaskResult(response);
       localStorage.setItem(
         localStorageSubmissionResultKey,
         JSON.stringify(response),

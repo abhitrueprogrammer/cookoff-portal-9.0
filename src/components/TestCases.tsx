@@ -48,9 +48,9 @@ export default function TestCases({ codeData }: testCaseProps) {
     <>
       {codeData ? (
         <div className="flex justify-center">
-          <div className="grid h-[85vh] w-full grid-rows-[2fr_5fr_2fr] bg-dark">
+          <div className="grid h-[60vh] w-full grid-rows-[2fr_5fr_2fr] bg-dark">
             <div className="flex justify-center">
-              <div className="m-3 flex w-full items-center justify-between bg-lightGray px-3">
+              <div className="m-3 flex w-full items-center justify-between rounded-lg bg-lightGray px-6">
                 <div>
                   <p
                     className={`${allPassed ? "text-green2" : "text-accent"} roboto text-2xl !font-medium`}
