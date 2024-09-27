@@ -3,26 +3,26 @@ import { submit } from "@/api/submit";
 import SelectLanguages from "@/components/ui/SelectLanguages";
 import boilerplates from "@/data/boilerplates.json";
 import {
-  ChildComponentProps,
-  TaskResult, runCodeInterface, type CodeSubmission
+  type ChildComponentProps,
+  type TaskResult,
+  type runCodeInterface,
+  type CodeSubmission,
 } from "@/schemas/api";
 import Editor, { loader, type OnMount } from "@monaco-editor/react";
 import type * as monaco from "monaco-editor";
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SubmitCodeWindow from "./Submitcodewindow";
-import { set } from "zod";
 
 // Load the Monaco Editor
-
 
 export default function CodeEditor({
   handleRun,
   isRunClicked,
   setisRunClicked,
-  latestClicked,
   setlatestClicked,
   selectedquestionId,
-  codeData,setCodeData
+  codeData,
+  setCodeData,
 }: ChildComponentProps) {
   const [sourceCode, setSourceCode] = useState("");
   const [languageId, setLanguageId] = useState(71); // Default to Python
@@ -41,32 +41,37 @@ export default function CodeEditor({
   const localStorageSubmissionResultKey = `submission-result-${questionId}`;
 
   useEffect(() => {
-    loader.init().then((monaco) => {
-      monaco.editor.defineTheme("gruvbox-dark", {
-        base: "vs-dark",
-        inherit: true,
-        rules: [
-          { token: "", foreground: "ebdbb2", background: "282828" },
-          { token: "keyword", foreground: "fb4934" },
-          { token: "string", foreground: "b8bb26" },
-          { token: "number", foreground: "d3869b" },
-          { token: "comment", foreground: "928374" },
-        ],
-        colors: {
-          "editor.background": "#282828",
-          "editor.foreground": "#ebdbb2",
-          "editorCursor.foreground": "#ebdbb2",
-          "editor.lineHighlightBackground": "#3c3836",
-          "editorLineNumber.foreground": "#928374",
-          "editor.selectionBackground": "#504945",
-          "editor.inactiveSelectionBackground": "#3c3836",
-        },
-      });
-    });
-  }
-  , []);
-
-  
+    loader
+      .init()
+      .then((monaco) => {
+        monaco.editor.defineTheme("gruvbox-dark", {
+          base: "vs-dark",
+          inherit: true,
+          rules: [
+            { token: "", foreground: "ebdbb2", background: "282828" },
+            { token: "keyword", foreground: "fb4934" },
+            { token: "string", foreground: "b8bb26" },
+            { token: "number", foreground: "d3869b" },
+            { token: "comment", foreground: "928374" },
+          ],
+          colors: {
+            "editor.background": "#282828",
+            "editor.foreground": "#ebdbb2",
+            "editorCursor.foreground": "#ebdbb2",
+            "editor.lineHighlightBackground": "#3c3836",
+            "editorLineNumber.foreground": "#928374",
+            "editor.selectionBackground": "#504945",
+            "editor.inactiveSelectionBackground": "#3c3836",
+          },
+        });
+      })
+      .catch((error) =>
+        console.error(
+          "An error occurred during initialization of Monaco: ",
+          error,
+        ),
+      );
+  }, []);
 
   // Load saved code and language from localStorage
   useEffect(() => {
@@ -95,9 +100,8 @@ export default function CodeEditor({
       localStorageSubmissionResultKey,
     );
     if (savedSubmissionResult) {
-      setTaskResult(JSON.parse(savedSubmissionResult));
-    }
-    else{
+      setTaskResult(JSON.parse(savedSubmissionResult) as TaskResult);
+    } else {
       setTaskResult(null);
     }
     console.log("Saved Submission Result:", savedSubmissionResult);
@@ -109,6 +113,7 @@ export default function CodeEditor({
     localStorageCodeKey,
     localStorageLanguageKey,
     selectedquestionId,
+    localStorageSubmissionResultKey,
   ]);
 
   const handleEditorDidMount: OnMount = (editor) => {
@@ -152,7 +157,9 @@ export default function CodeEditor({
       console.log("Submission ID:", submissionId);
 
       const response = await submission(submissionId);
-      setTaskResult(response);
+      if (selectedquestionId === lastSubmittedQuestionId) {
+        setTaskResult(response);
+      }
       localStorage.setItem(
         localStorageSubmissionResultKey,
         JSON.stringify(response),
@@ -218,9 +225,7 @@ export default function CodeEditor({
           </div>
         </div>
 
-        {taskResult && !codeData && (
-          <SubmitCodeWindow taskres={taskResult} />
-        )}
+        {taskResult && !codeData && <SubmitCodeWindow taskres={taskResult} />}
       </div>
     </div>
   );

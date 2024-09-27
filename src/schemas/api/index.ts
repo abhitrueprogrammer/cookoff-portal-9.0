@@ -1,4 +1,5 @@
-import { runData } from "@/components/EditorWindow";
+import { type runData } from "@/components/EditorWindow";
+import { type Dispatch, type SetStateAction } from "react";
 
 export interface ApiResponse {
   message: string;
@@ -68,16 +69,16 @@ export interface runCodeInterface {
 }
 
 export interface ChildComponentProps {
-  handleRun: (data: runCodeInterface) => void;
+  handleRun: (runCodeInterface: runCodeInterface) => void;
   isRunClicked: boolean;
-  setisRunClicked: (value: boolean) => void;
+  setisRunClicked: Dispatch<SetStateAction<boolean>>;
   selectedquestionId: string;
   latestClicked: string | null;
-  setlatestClicked: (value: string | null) => void;
+  setlatestClicked: Dispatch<SetStateAction<string | null>>;
   codeData: runData | null;
-  setCodeData: (value: runData | null) => void;
+  setCodeData: Dispatch<SetStateAction<runData | null>>;
 }
- interface Testcase {
+interface Testcase {
   testcase_id: string;
   runtime: number;
   memory: number;

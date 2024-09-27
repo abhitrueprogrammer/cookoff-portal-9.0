@@ -2,9 +2,7 @@
 import api from "@/api";
 import Codeeditor from "@/components/Codeeditor";
 import TestCases from "@/components/TestCases";
-import { use, useEffect, useState } from "react";
-import { set } from "zod";
-
+import { useEffect, useState } from "react";
 
 interface runCodeInterface {
   source_code: string;
@@ -27,11 +25,12 @@ export default function EditorWindow({
   const [isRunClicked, setIsRunClicked] = useState(false);
   const [codeData, setCodeData] = useState<runData | null>(null);
   const [latestClicked, setLatestClicked] = useState<string | null>(null);
-  const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<string | null>(null);
+  const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<
+    string | null
+  >(null);
   useEffect(() => {
     setCodeData(null);
-  }
-  , [selectedQuestionId]);
+  }, [selectedQuestionId]);
 
   async function handleRun({
     source_code,
@@ -49,9 +48,8 @@ export default function EditorWindow({
     try {
       const response = await api.post<runData>("/runcode", sendData);
       setCodeData(response.data);
-      setLatestClicked('run');
+      setLatestClicked("run");
       setLastSubmittedQuestionId(selectedQuestionId);
-
     } catch (err) {
       console.log(err);
     } finally {
@@ -64,7 +62,7 @@ export default function EditorWindow({
   }, [codeData]);
 
   return (
-    <div className="h-[83vh] 2xl:h-[86vh] w-[55%] overflow-y-auto bg-dark">
+    <div className="h-[83vh] w-[55%] overflow-y-auto bg-dark 2xl:h-[86vh]">
       <Codeeditor
         selectedquestionId={selectedQuestionId}
         isRunClicked={isRunClicked}
@@ -75,8 +73,12 @@ export default function EditorWindow({
         codeData={codeData}
         setCodeData={setCodeData}
       />
-      
-      {codeData &&  latestClicked==="run" && lastSubmittedQuestionId === selectedQuestionId && <TestCases codeData={codeData} />}
+
+      {codeData &&
+        latestClicked === "run" &&
+        lastSubmittedQuestionId === selectedQuestionId && (
+          <TestCases codeData={codeData} />
+        )}
     </div>
   );
 }
