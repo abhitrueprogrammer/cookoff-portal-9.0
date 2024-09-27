@@ -57,7 +57,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
   }, [router]);
 
   return (
-    <div className="flex h-[86vh] w-[45%] flex-row overflow-y-scroll bg-gray1">
+    <div className="flex h-[83vh] 2xl:h-[86vh] w-[45%] flex-row overflow-y-scroll bg-gray1">
       <div className="sticky top-0 flex flex-col text-white">
         {questions.map((question, index) => (
           <button
