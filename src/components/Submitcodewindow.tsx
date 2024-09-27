@@ -1,5 +1,5 @@
 import React from 'react';
-import { SubmitCodeWindowProps} from '@/schemas/api';
+import { type SubmitCodeWindowProps} from '@/schemas/api';
 
 
 

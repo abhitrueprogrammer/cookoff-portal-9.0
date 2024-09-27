@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [profile, setProfile] = useState<profileData>();
   return (
     <>
-      <div className="flex h-screen flex-col justify-between bg-zinc-900">
+      <div className="flex min-h-screen flex-col justify-between bg-zinc-900">
         {/* Navbar */}
         <NavBar />
 

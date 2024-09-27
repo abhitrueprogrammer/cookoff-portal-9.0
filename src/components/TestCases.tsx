@@ -1,8 +1,6 @@
 "use client";
 import TestComp from "@/components/TestComp";
 import React, { useState, useEffect } from "react";
-import lock from "@/assets/images/lock.png";
-import Image from "next/image";
 
 interface testCaseProps {
   codeData: codeData;
@@ -125,18 +123,6 @@ export default function TestCases({ codeData }: testCaseProps) {
                     {codeData.result[currentTestCase]?.expected_output}
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="mr-20 flex justify-end">
-              <div className="flex items-center text-xl capitalize text-white">
-                <Image
-                  className="mr-2 w-6"
-                  src={lock}
-                  alt="lock"
-                  height={100}
-                  width={100}
-                />
-                hidden test cases
               </div>
             </div>
           </div>
