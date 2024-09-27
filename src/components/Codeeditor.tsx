@@ -1,10 +1,11 @@
 import { submit } from "@/api/submit";
+import SelectLanguages from "@/components/ui/SelectLanguages";
 import boilerplates from "@/data/boilerplates.json"; // Import the boilerplates JSON file
 import { type CodeSubmission } from "@/schemas/api";
-import Editor, { type OnMount } from "@monaco-editor/react";
+import Editor, { loader, type OnMount } from "@monaco-editor/react";
 import type * as monaco from "monaco-editor";
 import { useEffect, useRef, useState } from "react";
-import SelectLanguages from "@/components/ui/SelectLanguages";
+import SubmitCodeWindow from "./Submitcodewindow";
 
 interface runCodeInterface {
   source_code: string;
@@ -18,6 +19,36 @@ interface ChildComponentProps {
   selectedquestionId: string;
 }
 
+
+
+
+// Load the Monaco Editor
+loader.init().then((monaco) => {
+  // Define the Gruvbox Dark theme
+  monaco.editor.defineTheme('gruvbox-dark', {
+    base: 'vs-dark',
+    inherit: true,
+    rules: [
+      { token: '', foreground: 'ebdbb2', background: '282828' },
+      { token: 'keyword', foreground: 'fb4934' },
+      { token: 'string', foreground: 'b8bb26' },
+      { token: 'number', foreground: 'd3869b' },
+      { token: 'comment', foreground: '928374' },
+      // Add more token rules as needed
+    ],
+    colors: {
+      'editor.background': '#282828',
+      'editor.foreground': '#ebdbb2',
+      'editorCursor.foreground': '#ebdbb2',
+      'editor.lineHighlightBackground': '#3c3836',
+      'editorLineNumber.foreground': '#928374',
+      'editor.selectionBackground': '#504945',
+      'editor.inactiveSelectionBackground': '#3c3836'
+    }
+  });
+});
+
+  
 export default function Codeeditor({
   handleRun,
   isRunClicked,
@@ -119,6 +150,7 @@ export default function Codeeditor({
 
       const submissionID = await submit(codeSubmission);
       console.log("Submission ID:", submissionID);
+      <SubmitCodeWindow />;
     } catch (error) {
       console.error("Error submitting code:", error);
     } finally {
@@ -148,7 +180,7 @@ export default function Codeeditor({
 
         <div className="flex rounded-3xl">
           <Editor
-            theme="vs-dark"
+            theme='gruvbox-dark'
             height="50vh"
             defaultLanguage="cpp"
             value={sourceCode}
@@ -158,18 +190,7 @@ export default function Codeeditor({
         </div>
 
         <div className="mt-4 flex w-full items-center">
-          <input
-            type="checkbox"
-            id="customInput"
-            className="h-4 w-4 rounded border-gray-300 bg-gray-900 text-orange-600 focus:ring-orange-500"
-          />
-          <label
-            htmlFor="customInput"
-            className="ml-2 whitespace-nowrap text-gray-400"
-          >
-            Test Against Custom Input
-          </label>
-
+          
           <div className="mt-4 flex w-full justify-end space-x-4">
             <button
               onClick={() => {

@@ -3,7 +3,7 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const languages = [
   {
@@ -34,7 +34,7 @@ const languages = [
   {
     id: 73,
     name: 'Rust',
-    avatar: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg',
+    avatar: 'https://icons.veryicon.com/png/o/business/vscode-program-item-icon/rust-1.png',
   },
   {
     id: 60,
@@ -67,7 +67,7 @@ export default function SelectLanguages({ onChange, value }: SelectLanguagesProp
   return (
     <Listbox value={selected} onChange={handleChange}>
       <div className="relative">
-        <ListboxButton className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+        <ListboxButton className="relative w-[150px] cursor-default rounded-md bg-dark py-1.5 pl-3 pr-10 text-left text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-accent sm:text-sm sm:leading-6">
           <span className="flex items-center">
             {selected?.avatar && <Image 
               alt="Selected language"
@@ -86,13 +86,13 @@ export default function SelectLanguages({ onChange, value }: SelectLanguagesProp
 
         <ListboxOptions
           transition
-          className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          className="absolute z-10 mt-1 max-h-56 w-[150px] overflow-auto rounded-md bg-dark py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         >
           {languages.map((language) => (
             <ListboxOption
               key={language.id}
               value={language}
-              className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
+              className="group relative cursor-default select-none py-2 pl-3 pr-9 text-white hover:cursor-pointer data-[focus]:bg-accent data-[focus]:text-white"
             >
               <div className="flex items-center">
                 <Image 
@@ -107,7 +107,7 @@ export default function SelectLanguages({ onChange, value }: SelectLanguagesProp
                 </span>
               </div>
 
-              <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
+              <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-accent group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
                 <CheckIcon aria-hidden="true" className="h-5 w-5" />
               </span>
             </ListboxOption>
