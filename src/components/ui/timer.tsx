@@ -1,10 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
 interface TimeCount {
   hours: string;
   minutes: string;
   seconds: string;
 }
+
+interface TimerResponse {
+  message: string;
+  remainingTime: number;
+}
+
 
 const getTimeLeft = (expiry: number): TimeCount => {
   let hours = "00";
@@ -29,18 +38,44 @@ const getTimeLeft = (expiry: number): TimeCount => {
 };
 
 const Timer = () => {
-  // Put time in seconds
-  const timerDuration = 1 * 25 * 60;
-
-  const [expiryTime] = useState(new Date().getTime() + timerDuration * 1000);
-  const [timeLeft, setTimeLeft] = useState<TimeCount>(getTimeLeft(expiryTime));
+  const router = useRouter();
+  const [timeLeft, setTimeLeft] = useState<TimeCount>({
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
+  });
+  const [expiryTime, setExpiryTime] = useState<number | null>(null);
 
   useEffect(() => {
+    const fetchTime = async () => {
+      try {
+        const res = await axios.get<TimerResponse>("/api/countdown");
+        const data = res.data;
+        if (data.remainingTime > 0) {
+          const expiry = new Date().getTime() + data.remainingTime * 1000;
+          setExpiryTime(expiry);
+        }
+      } catch (err) {
+        router.push("/dashboard");
+      }
+    };
+
+    void fetchTime();
+  }, []);
+
+  useEffect(() => {
+    if (!expiryTime) return;
+
     const interval = setInterval(() => {
-      setTimeLeft(getTimeLeft(expiryTime));
+      const time = getTimeLeft(expiryTime);
+      setTimeLeft(time);
+
+      if (time.hours === "00" && time.minutes === "00" && time.seconds === "00") {
+        clearInterval(interval); // Stop the countdown when it reaches zero
+      }
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); // Cleanup the interval on unmount
   }, [expiryTime]);
 
   return (

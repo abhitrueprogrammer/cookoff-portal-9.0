@@ -9,7 +9,7 @@ const QuesNavbar: React.FC = () => {
   const path = usePathname();
 
   return (
-    <div className="flex h-[17vh] 2xl:h-[14vh] w-full flex-row items-start 2xl:items-center justify-around border-b-2 border-cream bg-black">
+    <div className="flex h-[17vh] 2xl:h-[14vh] w-full flex-row items-center justify-around border-b-2 border-cream bg-black">
       <div>{path !== "/dashboard" && <Timer />}</div>
       <div className="relative text-6xl">
         <span className="s-sling mr-8 text-cream">COOK</span>

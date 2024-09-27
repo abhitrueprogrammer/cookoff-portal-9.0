@@ -5,12 +5,40 @@ import { type profileData } from "@/schemas/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Import useRouter
 import { ProfileHeaderSVG } from "@/assets/svgPaths";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface TimerResponse {
+  message: string;
+  remainingTime: number;
+}
+
 export default function Component({
   profile,
 }: {
   profile: profileData | undefined;
 }) {
   const router = useRouter(); // Initialize router
+  const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkTimerStatus = async () => {
+      try {
+        const res = await axios.get<TimerResponse>("/api/countdown");
+        const data = res.data;
+        if (data.remainingTime > 0) {
+          setIsTimerActive(true);
+        } else {
+          setIsTimerActive(false);
+        }
+      } catch (err) {
+        console.error("Failed to fetch timer status:", err);
+        setIsTimerActive(false);
+      }
+    };
+
+    void checkTimerStatus();
+  }, []);
 
   return (
     <div className="roboto relative my-auto max-h-full">
@@ -47,15 +75,16 @@ export default function Component({
             {"Score: " + profile?.score ?? "Nothing yet."}
           </div>
 
-          {/* Button for navigation */}
-          <div className="flex justify-center">
-            <button
-              onClick={() => router.push("/")} // Navigate to root route
-              className="s-sling mt-4 w-full rounded-lg bg-[#F14A16] px-6 py-3 text-white transition-colors hover:bg-[#d13e14]"
-            >
-              Start Cooking
-            </button>
-          </div>
+          {isTimerActive && (
+            <div className="flex justify-center">
+              <button
+                onClick={() => router.push("/")} // Navigate to root route
+                className="s-sling mt-4 w-full rounded-lg bg-[#F14A16] px-6 py-3 text-white transition-colors hover:bg-[#d13e14]"
+              >
+                Start Cooking
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
