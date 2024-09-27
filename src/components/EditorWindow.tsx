@@ -3,7 +3,7 @@ import api from "@/api";
 import Codeeditor from "@/components/Codeeditor";
 import TestCases from "@/components/TestCases";
 import { useEffect, useState } from "react";
-import SubmitCodeWindow from "./Submitcodewindow";
+
 
 interface runCodeInterface {
   source_code: string;
@@ -25,6 +25,8 @@ export default function EditorWindow({
 }: EditorWindowProps) {
   const [isRunClicked, setIsRunClicked] = useState(false);
   const [codeData, setCodeData] = useState<runData | null>(null);
+  const [latestClicked, setLatestClicked] = useState<string | null>(null);
+  const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<string | null>(null);
 
   async function handleRun({
     source_code,
@@ -42,6 +44,9 @@ export default function EditorWindow({
     try {
       const response = await api.post<runData>("/runcode", sendData);
       setCodeData(response.data);
+      setLatestClicked('run');
+      setLastSubmittedQuestionId(selectedQuestionId);
+
     } catch (err) {
       console.log(err);
     } finally {
@@ -58,10 +63,13 @@ export default function EditorWindow({
       <Codeeditor
         selectedquestionId={selectedQuestionId}
         isRunClicked={isRunClicked}
+        setisRunClicked={setIsRunClicked}
         handleRun={handleRun}
+        latestClicked={latestClicked}
+        setlatestClicked={setLatestClicked}
       />
-      <SubmitCodeWindow />
-      {codeData && <TestCases codeData={codeData} />}
+      
+      {codeData &&  latestClicked==="run" && lastSubmittedQuestionId === selectedQuestionId && <TestCases codeData={codeData} />}
     </div>
   );
 }

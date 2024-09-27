@@ -56,3 +56,42 @@ export interface Question {
   SampleTestOutput: string[];
   Explanation: string[];
 }
+
+////
+
+export interface runCodeInterface {
+  source_code: string;
+  language_id: number;
+  question_id: string;
+}
+
+export interface ChildComponentProps {
+  handleRun: (data: runCodeInterface) => void;
+  isRunClicked: boolean;
+  setisRunClicked: (value: boolean) => void;
+  selectedquestionId: string;
+  latestClicked: string | null;
+  setlatestClicked: (value: string | null) => void;
+}
+ interface Testcase {
+  testcase_id: string;
+  runtime: number;
+  memory: number;
+  status: string;
+  description: string;
+}
+
+export interface TaskResult {
+  submission_id: string;
+  question_id: string;
+  testcases_passed: number;
+  testcases_failed: number;
+  submission_runtime: number;
+  submission_memory: number;
+  submission_time: string;
+  description: string;
+  testcases: Testcase[];
+}
+export interface SubmitCodeWindowProps {
+  taskres: TaskResult;
+}
