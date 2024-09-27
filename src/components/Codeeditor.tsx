@@ -1,30 +1,20 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { submit } from "@/api/submit";
 import SelectLanguages from "@/components/ui/SelectLanguages";
-import boilerplates from "@/data/boilerplates.json"; // Import the boilerplates JSON file
+import boilerplates from "@/data/boilerplates.json";
 import { type CodeSubmission } from "@/schemas/api";
 import Editor, { loader, type OnMount } from "@monaco-editor/react";
 import type * as monaco from "monaco-editor";
-import { useEffect, useRef, useState } from "react";
-import SubmitCodeWindow from "./Submitcodewindow";
-
-interface runCodeInterface {
-  source_code: string;
-  language_id: number;
-  question_id: string;
-}
-
-interface ChildComponentProps {
-  handleRun: (data: runCodeInterface) => void;
-  isRunClicked: boolean;
-  selectedquestionId: string;
-}
+import SubmitCodeWindow from './Submitcodewindow';
+import { submission } from '@/api/submission';
+import { runCodeInterface,ChildComponentProps,TaskResult } from '@/schemas/api';
+import { set } from 'zod';
 
 
 
 
 // Load the Monaco Editor
 loader.init().then((monaco) => {
-  // Define the Gruvbox Dark theme
   monaco.editor.defineTheme('gruvbox-dark', {
     base: 'vs-dark',
     inherit: true,
@@ -34,7 +24,6 @@ loader.init().then((monaco) => {
       { token: 'string', foreground: 'b8bb26' },
       { token: 'number', foreground: 'd3869b' },
       { token: 'comment', foreground: '928374' },
-      // Add more token rules as needed
     ],
     colors: {
       'editor.background': '#282828',
@@ -48,10 +37,9 @@ loader.init().then((monaco) => {
   });
 });
 
-  
-export default function Codeeditor({
+export default function CodeEditor({
   handleRun,
-  isRunClicked,
+  isRunClicked,setisRunClicked,latestClicked,setlatestClicked,
   selectedquestionId,
 }: ChildComponentProps) {
   const [sourceCode, setSourceCode] = useState(boilerplates["71"]); // Default to Python
@@ -60,6 +48,9 @@ export default function Codeeditor({
 
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // State for button submission
+
+  const [taskResult, setTaskResult] = useState<TaskResult>();
+  const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<string | null>(null);
 
   const localStorageCodeKey = `code-${questionId}-${languageId}`;
   const localStorageLanguageKey = `language-${questionId}`;
@@ -147,14 +138,23 @@ export default function Codeeditor({
 
     try {
       setIsSubmitting(true); // Set submitting state to true
+      setisRunClicked(true);
+      setlatestClicked('submit');
+      setLastSubmittedQuestionId(selectedquestionId);
 
-      const submissionID = await submit(codeSubmission);
-      console.log("Submission ID:", submissionID);
-      <SubmitCodeWindow />;
+      const ID = await submit(codeSubmission);
+      console.log("Submission ID:", ID);
+
+      const response = await submission(ID);
+      setTaskResult(response);
+      // console.log(response.data);
+      
+
     } catch (error) {
       console.error("Error submitting code:", error);
     } finally {
       setIsSubmitting(false); // Reset submitting state after submission
+      setisRunClicked(false);
     }
   }
 
@@ -210,6 +210,10 @@ export default function Codeeditor({
             </button>
           </div>
         </div>
+
+        {taskResult && latestClicked==="submit" && lastSubmittedQuestionId === selectedquestionId && (
+          <SubmitCodeWindow taskres={taskResult} />
+        )}
       </div>
     </div>
   );

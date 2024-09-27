@@ -1,16 +1,15 @@
-import { type CodeSubmission, type SubmissionResponse } from "@/schemas/api";
+
 import api from ".";
 import { handleAPIError } from "@/lib/error";
 
 
-export async function submission(codesubmission: CodeSubmission){
+
+export async function submission(submission_id: string) {
     try {
-        const { data } = await api.post<SubmissionResponse>(
-          `/submit`,
-          codesubmission,
+        const { data } = await api.get(
+          `/result/${submission_id}`
         );
-        const submissionId = data.submission_id;
-        return submissionId;
+        return data;
       } catch (e) {
         throw handleAPIError(e);
       }
