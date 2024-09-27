@@ -2,7 +2,8 @@
 import api from "@/api";
 import Codeeditor from "@/components/Codeeditor";
 import TestCases from "@/components/TestCases";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import { set } from "zod";
 
 
 interface runCodeInterface {
@@ -11,7 +12,7 @@ interface runCodeInterface {
   question_id: string;
 }
 
-interface runData {
+export interface runData {
   no_testcases_passed: number;
   result: [];
 }
@@ -27,6 +28,10 @@ export default function EditorWindow({
   const [codeData, setCodeData] = useState<runData | null>(null);
   const [latestClicked, setLatestClicked] = useState<string | null>(null);
   const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<string | null>(null);
+  useEffect(() => {
+    setCodeData(null);
+  }
+  , [selectedQuestionId]);
 
   async function handleRun({
     source_code,
@@ -67,6 +72,8 @@ export default function EditorWindow({
         handleRun={handleRun}
         latestClicked={latestClicked}
         setlatestClicked={setLatestClicked}
+        codeData={codeData}
+        setCodeData={setCodeData}
       />
       
       {codeData &&  latestClicked==="run" && lastSubmittedQuestionId === selectedQuestionId && <TestCases codeData={codeData} />}

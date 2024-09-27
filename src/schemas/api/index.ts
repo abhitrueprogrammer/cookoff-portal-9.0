@@ -1,3 +1,5 @@
+import { runData } from "@/components/EditorWindow";
+
 export interface ApiResponse {
   message: string;
   data: unknown;
@@ -72,6 +74,8 @@ export interface ChildComponentProps {
   selectedquestionId: string;
   latestClicked: string | null;
   setlatestClicked: (value: string | null) => void;
+  codeData: runData | null;
+  setCodeData: (value: runData | null) => void;
 }
  interface Testcase {
   testcase_id: string;

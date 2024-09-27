@@ -1,80 +1,72 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { submission } from "@/api/submission";
 import { submit } from "@/api/submit";
 import SelectLanguages from "@/components/ui/SelectLanguages";
 import boilerplates from "@/data/boilerplates.json";
-import { type CodeSubmission } from "@/schemas/api";
+import {
+  ChildComponentProps,
+  TaskResult, runCodeInterface, type CodeSubmission
+} from "@/schemas/api";
 import Editor, { loader, type OnMount } from "@monaco-editor/react";
 import type * as monaco from "monaco-editor";
-import SubmitCodeWindow from './Submitcodewindow';
-import { submission } from '@/api/submission';
-import { runCodeInterface,ChildComponentProps,TaskResult } from '@/schemas/api';
-import { set } from 'zod';
-
-
-
+import { use, useEffect, useRef, useState } from "react";
+import SubmitCodeWindow from "./Submitcodewindow";
+import { set } from "zod";
 
 // Load the Monaco Editor
-loader.init().then((monaco) => {
-  monaco.editor.defineTheme('gruvbox-dark', {
-    base: 'vs-dark',
-    inherit: true,
-    rules: [
-      { token: '', foreground: 'ebdbb2', background: '282828' },
-      { token: 'keyword', foreground: 'fb4934' },
-      { token: 'string', foreground: 'b8bb26' },
-      { token: 'number', foreground: 'd3869b' },
-      { token: 'comment', foreground: '928374' },
-    ],
-    colors: {
-      'editor.background': '#282828',
-      'editor.foreground': '#ebdbb2',
-      'editorCursor.foreground': '#ebdbb2',
-      'editor.lineHighlightBackground': '#3c3836',
-      'editorLineNumber.foreground': '#928374',
-      'editor.selectionBackground': '#504945',
-      'editor.inactiveSelectionBackground': '#3c3836'
-    }
-  });
-});
+
 
 export default function CodeEditor({
   handleRun,
-  isRunClicked,setisRunClicked,latestClicked,setlatestClicked,
+  isRunClicked,
+  setisRunClicked,
+  latestClicked,
+  setlatestClicked,
   selectedquestionId,
+  codeData,setCodeData
 }: ChildComponentProps) {
-  const [sourceCode, setSourceCode] = useState(boilerplates["71"]); // Default to Python
+  const [sourceCode, setSourceCode] = useState("");
   const [languageId, setLanguageId] = useState(71); // Default to Python
   const questionId = selectedquestionId; // Use selectedquestionId directly
 
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // State for button submission
 
-  const [taskResult, setTaskResult] = useState<TaskResult>();
-  const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<string | null>(null);
+  const [taskResult, setTaskResult] = useState<TaskResult | null>(null);
+  const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<
+    string | null
+  >(null);
 
   const localStorageCodeKey = `code-${questionId}-${languageId}`;
   const localStorageLanguageKey = `language-${questionId}`;
+  const localStorageSubmissionResultKey = `submission-result-${questionId}`;
 
   useEffect(() => {
-    const savedLanguageId = localStorage.getItem(localStorageLanguageKey);
-    if (savedLanguageId) {
-      setLanguageId(parseInt(savedLanguageId));
-      setSourceCode(
-        (boilerplates as Record<string, string>)[savedLanguageId.toString()] ??
-          boilerplates["71"],
-      );
-    } else {
-      setLanguageId(71);
-      localStorage.setItem(`language-${selectedquestionId}`, "71");
+    loader.init().then((monaco) => {
+      monaco.editor.defineTheme("gruvbox-dark", {
+        base: "vs-dark",
+        inherit: true,
+        rules: [
+          { token: "", foreground: "ebdbb2", background: "282828" },
+          { token: "keyword", foreground: "fb4934" },
+          { token: "string", foreground: "b8bb26" },
+          { token: "number", foreground: "d3869b" },
+          { token: "comment", foreground: "928374" },
+        ],
+        colors: {
+          "editor.background": "#282828",
+          "editor.foreground": "#ebdbb2",
+          "editorCursor.foreground": "#ebdbb2",
+          "editor.lineHighlightBackground": "#3c3836",
+          "editorLineNumber.foreground": "#928374",
+          "editor.selectionBackground": "#504945",
+          "editor.inactiveSelectionBackground": "#3c3836",
+        },
+      });
+    });
+  }
+  , []);
 
-      setSourceCode(boilerplates["71"]);
-      localStorage.setItem(`code-${selectedquestionId}-71`, boilerplates["71"]);
-    }
-    const savedCode = localStorage.getItem(localStorageCodeKey);
-    if (savedCode) {
-      setSourceCode(savedCode);
-    }
-  }, [localStorageCodeKey, localStorageLanguageKey, selectedquestionId]);
+  
 
   // Load saved code and language from localStorage
   useEffect(() => {
@@ -94,12 +86,24 @@ export default function CodeEditor({
       setSourceCode(boilerplates["71"]);
       localStorage.setItem(`code-${selectedquestionId}-71`, boilerplates["71"]);
     }
-
     // Retrieve saved code for this language and question
     const savedCode = localStorage.getItem(localStorageCodeKey);
     if (savedCode) {
       setSourceCode(savedCode);
     }
+    const savedSubmissionResult = localStorage.getItem(
+      localStorageSubmissionResultKey,
+    );
+    if (savedSubmissionResult) {
+      setTaskResult(JSON.parse(savedSubmissionResult));
+    }
+    else{
+      setTaskResult(null);
+    }
+    console.log("Saved Submission Result:", savedSubmissionResult);
+    console.log("Saved Code:", savedCode);
+    console.log("Saved Language ID:", savedLanguageId);
+    console.log("Saved Question ID:", questionId);
   }, [
     questionId,
     localStorageCodeKey,
@@ -119,41 +123,44 @@ export default function CodeEditor({
     }
   }
 
-  // Handle language change and save to localStorage
   const handleLanguageChange = (id: number) => {
     setLanguageId(id);
     setSourceCode(
       (boilerplates as Record<string, string>)[id.toString()] ??
         boilerplates["71"],
-    ); // Load the boilerplate for the new language
-    localStorage.setItem(localStorageLanguageKey, id.toString()); // Save selected language for this question
+    );
+    localStorage.setItem(localStorageLanguageKey, id.toString());
   };
 
   async function handleSubmitCode() {
     const codeSubmission: CodeSubmission = {
       source_code: sourceCode,
       language_id: languageId,
-      question_id: selectedquestionId, // Use the updated questionId from prop
+      question_id: questionId,
     };
 
     try {
-      setIsSubmitting(true); // Set submitting state to true
+      localStorage.removeItem(localStorageSubmissionResultKey);
+      setCodeData(null);
+      setTaskResult(null);
+      setIsSubmitting(true);
       setisRunClicked(true);
-      setlatestClicked('submit');
+      setlatestClicked("submit");
       setLastSubmittedQuestionId(selectedquestionId);
 
-      const ID = await submit(codeSubmission);
-      console.log("Submission ID:", ID);
+      const submissionId = await submit(codeSubmission);
+      console.log("Submission ID:", submissionId);
 
-      const response = await submission(ID);
+      const response = await submission(submissionId);
       setTaskResult(response);
-      // console.log(response.data);
-      
-
+      localStorage.setItem(
+        localStorageSubmissionResultKey,
+        JSON.stringify(response),
+      );
     } catch (error) {
       console.error("Error submitting code:", error);
     } finally {
-      setIsSubmitting(false); // Reset submitting state after submission
+      setIsSubmitting(false);
       setisRunClicked(false);
     }
   }
@@ -161,7 +168,7 @@ export default function CodeEditor({
   const runCodeParams: runCodeInterface = {
     source_code: sourceCode,
     language_id: languageId,
-    question_id: selectedquestionId,
+    question_id: questionId,
   };
 
   return (
@@ -170,7 +177,6 @@ export default function CodeEditor({
         <div className="mb-4 flex items-center text-xl text-white">
           Languages:
           <div className="w-[150px] pl-4">
-            {/* Pass the selected languageId as the value prop to SelectLanguages */}
             <SelectLanguages
               value={languageId}
               onChange={handleLanguageChange}
@@ -180,7 +186,7 @@ export default function CodeEditor({
 
         <div className="flex rounded-3xl">
           <Editor
-            theme='gruvbox-dark'
+            theme="gruvbox-dark"
             height="50vh"
             defaultLanguage="cpp"
             value={sourceCode}
@@ -190,7 +196,6 @@ export default function CodeEditor({
         </div>
 
         <div className="mt-4 flex w-full items-center">
-          
           <div className="mt-4 flex w-full justify-end space-x-4">
             <button
               onClick={() => {
@@ -202,16 +207,18 @@ export default function CodeEditor({
               {isRunClicked ? "Cooking..." : "Cook"}
             </button>
             <button
-              className={`rounded py-2 text-white ${isSubmitting ? "bg-gray-500" : "bg-orange-600"} w-28`}
+              className={`rounded py-2 text-white ${
+                isSubmitting ? "bg-gray-500" : "bg-orange-600"
+              } w-28`}
               onClick={handleSubmitCode}
-              disabled={isSubmitting} // Disable button while submitting
+              disabled={isSubmitting}
             >
               {isSubmitting ? "Cooking..." : "Submit Code"}
             </button>
           </div>
         </div>
 
-        {taskResult && latestClicked==="submit" && lastSubmittedQuestionId === selectedquestionId && (
+        {taskResult && !codeData && (
           <SubmitCodeWindow taskres={taskResult} />
         )}
       </div>

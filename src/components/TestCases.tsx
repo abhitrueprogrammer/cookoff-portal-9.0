@@ -67,11 +67,7 @@ export default function TestCases({ codeData }: testCaseProps) {
                     {allPassed ? "Great Work!! " : "Try Again!!!"}
                   </p>
                 </div>
-                <div>
-                  <button className="roboto rounded bg-green2 p-2 px-4 text-sm !font-medium text-white">
-                    Next Problem
-                  </button>
-                </div>
+                
               </div>
             </div>
             <div className="flex justify-center text-white">
