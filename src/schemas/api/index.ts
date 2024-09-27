@@ -27,6 +27,7 @@ export interface Submission {
   title: string;
   description: string | null;
   score: number;
+  max_score: number;
 }
 export interface dashboard {
   round: number;

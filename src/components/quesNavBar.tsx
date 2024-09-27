@@ -1,13 +1,10 @@
 "use client";
 
-import React from "react";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
-import Timer from "./ui/timer";
-import sululogo from "@/assets/sulu.svg";
 import Judgelogo from "@/assets/judge.svg";
-import { useRouter } from "next/navigation";
-
+import sululogo from "@/assets/sulu.svg";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import Timer from "./ui/timer";
 export default function QuesNavbar() {
   const path = usePathname();
   const router = useRouter();
