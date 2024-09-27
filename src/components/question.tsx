@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 
-import { useState, useEffect } from "react";
 import { byRound } from "@/api/question";
+import { type Question } from "@/schemas/api";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import vscDarkPlus from "react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus";
-import { type Question } from "@/schemas/api";
 
 interface QuestionProps {
   onQuestionSelect: (id: string) => void;

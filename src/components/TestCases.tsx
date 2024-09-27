@@ -64,7 +64,7 @@ export default function TestCases({ codeData }: testCaseProps) {
                     Test Cases Have Passed {allPassed ? " :-)" : " :'-("}
                   </p>
                   <p className="roboto text-sm text-white">
-                    {allPassed ? "Well Done chigga!! " : "Try Again!!!"}
+                    {allPassed ? "Great Work!! " : "Try Again!!!"}
                   </p>
                 </div>
                 <div>
@@ -75,7 +75,7 @@ export default function TestCases({ codeData }: testCaseProps) {
               </div>
             </div>
             <div className="flex justify-center text-white">
-              <div className="flex w-[40%] flex-col">
+              <div className="flex w-[40%] h-40 flex-col">
                 {codeData.result.map((item, index) => (
                   <div
                     key={index}
@@ -94,7 +94,7 @@ export default function TestCases({ codeData }: testCaseProps) {
                   </div>
                 ))}
                 {codeData ? (
-                  <button className="mx-6 my-2 rounded-lg bg-black px-4 py-3 text-center text-base">
+                  <button className="mx-3 my-2 rounded-lg bg-black border-2 border-dark px-4 py-3 text-center ">
                     Custom Input
                   </button>
                 ) : (
@@ -103,17 +103,17 @@ export default function TestCases({ codeData }: testCaseProps) {
               </div>
               <div className="mx-4 w-[60%]">
                 <div className="my-2">
-                  <div className="text-base">Message</div>
+                  <div className="">Message</div>
 
                   <div
-                    className={`${codeData.result[currentTestCase]?.status.description === "Accepted" ? "text-green2" : "text-accent"} my-2 rounded bg-lightGray px-4 py-1 text-xs`}
+                    className={`${codeData.result[currentTestCase]?.status.description === "Accepted" ? "text-green2" : "text-red-500"} my-2 h-12 bg-lightGray px-4 py-3 text-base rounded-lg`}
                   >
                     {codeData.result[currentTestCase]?.status.description}
                   </div>
                 </div>
                 <div className="my-2">
                   <div className="text-base">Output</div>
-                  <div className="my-2 rounded bg-lightGray px-4 py-1 text-xs">
+                  <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.stdout
                       ? codeData.result[currentTestCase]?.stdout
                       : "-"}
@@ -121,7 +121,7 @@ export default function TestCases({ codeData }: testCaseProps) {
                 </div>
                 <div className="my-2">
                   <div className="text-base">Expected Output</div>
-                  <div className="my-2 rounded bg-lightGray px-4 py-1 text-xs">
+                  <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.expected_output}
                   </div>
                 </div>

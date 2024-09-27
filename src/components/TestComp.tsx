@@ -14,23 +14,23 @@ type TestCompProps = {
 export default function TestComp({ isPassed, num, isClicked }: TestCompProps) {
   return (
     <div
-      className={`mx-6 my-2 flex cursor-pointer items-center justify-between rounded-lg border-2 bg-black px-4 py-3 text-center ${isClicked && isPassed ? "border-green2" : isClicked && !isPassed ? "border-accent" : "border-dark"}`}
+      className={`mx-3 my-2 flex cursor-pointer h-14 items-center justify-between rounded-lg border-2 bg-black px-4 py-3 text-center ${isClicked && isPassed ? "border-green2" : isClicked && !isPassed ? "border-accent" : "border-dark"}`}
     >
       <Image
-        className="w-[10%]"
+        className=""
         src={isPassed ? gCheck : rCross}
         alt="green check"
-        width={100}
-        height={100}
+        width={18}
+        height={18}
       />
       <p className="mx-1 text-base">Test Case {num + 1}</p>
 
       <Image
-        className="w-[10%]"
+        className=""
         src={isPassed ? gEye : rEye}
         alt="green check"
-        width={100}
-        height={100}
+        width={18}
+        height={18}
       />
     </div>
   );

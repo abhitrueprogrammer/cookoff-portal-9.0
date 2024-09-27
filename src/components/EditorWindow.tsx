@@ -3,6 +3,7 @@ import api from "@/api";
 import Codeeditor from "@/components/Codeeditor";
 import TestCases from "@/components/TestCases";
 import { useEffect, useState } from "react";
+import SubmitCodeWindow from "./Submitcodewindow";
 
 interface runCodeInterface {
   source_code: string;
@@ -59,6 +60,7 @@ export default function EditorWindow({
         isRunClicked={isRunClicked}
         handleRun={handleRun}
       />
+      <SubmitCodeWindow />
       {codeData && <TestCases codeData={codeData} />}
     </div>
   );
