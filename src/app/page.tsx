@@ -35,7 +35,7 @@ export default function Login() {
         error: (err: ApiError) => err.message,
       });
       setTimeout(() => router.push("/dashboard"), 1000);
-    } catch (err) { }
+    } catch {}
     setIsLoading(false);
   }
 

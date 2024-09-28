@@ -89,7 +89,7 @@ export default function Component({
           })
         ) : (
           <div className="s-sling mx-auto flex h-full w-fit items-center justify-center text-4xl font-bold text-[#B7AB98]">
-            No Submissions Yet !
+            {data?.round ? "No submissions yet" : "Event not started yet"}
           </div>
         )}
       </div>

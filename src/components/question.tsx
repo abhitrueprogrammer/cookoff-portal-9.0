@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import vscDarkPlus from "react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus";
-import { TimerResponse } from "./ui/timer";
+import { type TimerResponse } from "./ui/timer";
 
 interface QuestionProps {
   onQuestionSelect: (id: string) => void;

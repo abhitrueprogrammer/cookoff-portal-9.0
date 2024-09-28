@@ -31,7 +31,7 @@ export default function ProfileComponent({
         } else {
           setIsTimerActive(false);
         }
-      } catch (err) {
+      } catch {
         setIsTimerActive(false);
       }
     };
@@ -73,7 +73,7 @@ export default function ProfileComponent({
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
             {"Score: " +
               (profile?.score
-                ? (Math.round(profile.score * 100) / 100)
+                ? Math.round(profile.score * 100) / 100
                 : "Nothing yet.")}
           </div>
 

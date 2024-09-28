@@ -74,7 +74,7 @@ export default function EditorWindow({
       setCodeData(response.data);
       setLatestClicked("run");
       setLastSubmittedQuestionId(selectedQuestionId);
-    } catch (err) {
+    } catch {
     } finally {
       setIsRunClicked(false);
     }
