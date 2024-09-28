@@ -17,7 +17,7 @@ export default function NotFoundPage() {
   return (
     <div className="bg-gradient-to-b from-black via-orange-500/90 to-black min-h-screen overflow-y-hidden">
       <div className='mt-36 text-center text-5xl s-sling text-orange-500 bg-gradient-to-r from-red-500 via-orange-500 to-white bg-clip-text text-transparent'>
-        Something Went Wrong
+        Page Not Found
       </div>
       <p className='text-white text-center s-sling'>Could not find the requested resource</p>
       <p className='text-center mt-5 font-bold text-2xl font-mono text-orange-700 bg-gradient-to-r from-red-500 via-orange-500 to-white bg-clip-text text-transparent'>
