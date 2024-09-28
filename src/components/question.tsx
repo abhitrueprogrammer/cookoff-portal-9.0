@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 
 import { byRound } from "@/api/question";
@@ -14,11 +13,16 @@ import vscDarkPlus from "react-syntax-highlighter/dist/esm/styles/prism/vsc-dark
 import { type TimerResponse } from "./ui/timer";
 
 interface QuestionProps {
+  questions: Question[];
+  setQuestions: React.Dispatch<React.SetStateAction<Question[]>>;
   onQuestionSelect: (id: string) => void;
 }
 
-export default function Question({ onQuestionSelect }: QuestionProps) {
-  const [questions, setQuestions] = useState<Question[]>([]);
+export default function QuestionComponent({
+  questions,
+  setQuestions,
+  onQuestionSelect,
+}: QuestionProps) {
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number>(0);
   const [selectedQuestion, setSelectedQuestion] = useState<
@@ -45,7 +49,6 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         const timer = await axios.get<TimerResponse>("/api/countdown");
         if (timer.data.remainingTime <= 0) {
           toast.error("Time is up");
-
           setTimeout(() => {
             router.push("/kitchen");
           }, 1000);
@@ -53,7 +56,6 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         }
       } catch {
         toast.error("Timer not started");
-
         setTimeout(() => {
           router.push("/kitchen");
         }, 1000);

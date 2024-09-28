@@ -8,7 +8,12 @@ import sululogo from "@/assets/sulu.svg";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Timer from "./ui/timer";
-export default function QuesNavbar() {
+
+export default function QuesNavbar({
+  setTimeOver,
+}: {
+  setTimeOver: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const path = usePathname();
   const router = useRouter();
 
@@ -19,7 +24,7 @@ export default function QuesNavbar() {
 
   return (
     <div className="flex h-[17vh] w-screen flex-row items-center justify-between border-b-2 border-cream bg-black px-10 2xl:h-[14vh]">
-      <div>{path !== "/kitchen" && <Timer />}</div>
+      <div>{path !== "/kitchen" && <Timer setTimeOver={setTimeOver} />}</div>
       <div className="flex w-full flex-col items-center">
         <div className="flex w-fit flex-col">
           <div>

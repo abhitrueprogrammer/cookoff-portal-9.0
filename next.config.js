@@ -5,6 +5,8 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {images: {domains: ["icons.veryicon.com"]}};
+const config = {
+  images: { domains: ["icons.veryicon.com"] },
+};
 
 export default config;

@@ -36,13 +36,13 @@ const getTimeLeft = (expiry: number): TimeCount => {
   return { hours, minutes, seconds };
 };
 
-const Timer = () => {
+const Timer = ({
+  setTimeOver,
+}: {
+  setTimeOver: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState<TimeCount>({
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-  });
+  const [timeLeft, setTimeLeft] = useState<TimeCount>();
   const [expiryTime, setExpiryTime] = useState<number | null>(null);
 
   useEffect(() => {
@@ -53,6 +53,8 @@ const Timer = () => {
         if (data.remainingTime > 0) {
           const expiry = new Date().getTime() + data.remainingTime * 1000;
           setExpiryTime(expiry);
+        } else if (data.remainingTime <= 0) {
+          setTimeOver(true);
         }
       } catch {
         router.push("/kitchen");
@@ -60,7 +62,7 @@ const Timer = () => {
     };
 
     void fetchTime();
-  }, [router]);
+  }, [router, setTimeOver]);
 
   useEffect(() => {
     if (!expiryTime) return;
@@ -81,10 +83,22 @@ const Timer = () => {
     return () => clearInterval(interval); // Cleanup the interval on unmount
   }, [expiryTime]);
 
+  useEffect(() => {
+    if (
+      timeLeft?.hours === "00" &&
+      timeLeft?.minutes === "00" &&
+      timeLeft?.seconds === "00"
+    ) {
+      setTimeOver(true);
+    }
+  }, [timeLeft, setTimeOver]);
+
   return (
-    <div className="m-4 border-2 border-cream p-2 text-center text-accent">
-      <h1 className="w-[100px] text-xl font-bold">{`${timeLeft.hours}:${timeLeft.minutes}:${timeLeft.seconds}`}</h1>
-    </div>
+    timeLeft && (
+      <div className="m-4 border-2 border-cream p-2 text-center text-accent">
+        <h1 className="w-[100px] text-xl font-bold">{`${timeLeft.hours}:${timeLeft.minutes}:${timeLeft.seconds}`}</h1>
+      </div>
+    )
   );
 };
 

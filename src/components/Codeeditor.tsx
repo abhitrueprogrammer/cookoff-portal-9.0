@@ -229,9 +229,6 @@ export default function CodeEditor({
         if (timer.data.remainingTime <= 0) {
           toast.error("Time is up");
           setisRunClicked(false);
-          setTimeout(() => {
-            router.push("/kitchen");
-          }, 1000);
           return;
         }
       } catch {
