@@ -77,7 +77,7 @@ export default function ProfileComponent({
             </div>
             <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
               {"Score: " +
-                (profile?.score
+                (typeof profile?.score === "number"
                   ? Math.round(profile.score * 100) / 100
                   : "Nothing yet.")}
             </div>
