@@ -76,7 +76,7 @@ export default function Component({
                         </p>
                         <div className="text-md text-[#B7AB98]">
                           {"Your Score is:  " +
-                            problem.score.toFixed(2) +
+                            Math.round(problem.score * 100) / 100 +
                             "/" +
                             problem.max_score}
                         </div>
