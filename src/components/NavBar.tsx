@@ -13,7 +13,7 @@ export default function NavBar() {
     setTimeout(() => router.push("/"), 1000);
   }
   return (
-    <div>
+    <div className="h-[10vh]">
       <div className="s-sling nav border-b-1 flex items-center justify-around bg-black">
         <div></div>
         <div className="my-3 text-5xl text-white">

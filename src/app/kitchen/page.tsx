@@ -8,16 +8,13 @@ const Dashboard = () => {
   const [profile, setProfile] = useState<profileData>();
   return (
     <>
-      <div className="flex min-h-screen flex-col bg-[#131313]">
-        {/* Navbar */}
+      <div className="flex h-screen flex-col bg-[#131313]">
         <NavBar />
-        <div className="my-auto flex h-full p-8">
-          <div className="flex flex-grow overflow-y-auto overflow-x-hidden p-4">
-            <div className="mb-14 mt-12 flex flex-grow">
-              <DashboardComponent setProfile={setProfile} />
-            </div>
+        <div className="my-auto flex h-[90vh] gap-4 px-[5%] py-4">
+          <div className="flex grow p-4">
+            <DashboardComponent setProfile={setProfile} />
           </div>
-          <div className="w-1/3">
+          <div className="flex w-1/3 items-center">
             <ProfileComponent profile={profile} />
           </div>
         </div>
