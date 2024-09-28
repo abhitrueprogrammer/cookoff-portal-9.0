@@ -1,6 +1,9 @@
 "use client";
 
+
+
 import Judgelogo from "@/assets/judge.svg";
+import musclemind from "@/assets/musclemind.svg";
 import sululogo from "@/assets/sulu.svg";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -25,7 +28,20 @@ export default function QuesNavbar() {
             <span className="s-sling text-7xl text-cream">9.0</span>
           </div>
 
-          <div className="flex items-center self-end">
+          <div className="flex items-center gap-52">
+          <div className="flex ">
+          <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
+              Title sponser
+            </span>
+            <Image
+              src={musclemind as HTMLImageElement}
+              alt="musclemind"
+              width={60}
+              height={40}
+              style={{ marginTop: "3px" }}
+            />
+            </div>
+            <div className="flex ">
             <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
               Powered by
             </span>
@@ -46,6 +62,7 @@ export default function QuesNavbar() {
               height={60}
               style={{ marginTop: "-2px" }}
             />
+            </div>
           </div>
         </div>
       </div>
