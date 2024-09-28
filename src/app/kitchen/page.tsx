@@ -17,7 +17,7 @@ const Dashboard = () => {
               <DashboardComponent setProfile={setProfile} />
             </div>
           </div>
-          <div className=" ">
+          <div className="w-1/3">
             <ProfileComponent profile={profile} />
           </div>
         </div>
