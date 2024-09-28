@@ -106,10 +106,10 @@ export default function TestCases({ codeData }: testCaseProps) {
                             .split("\n")
                             .map((line, index) => <div key={index}>{line}</div>)
                         : codeData.result[currentTestCase]?.stderr
-                            .split("\n")
-                            .map((line, index) => (
-                              <div key={index}>{line}</div>
-                            ))}
+                            ? codeData.result[currentTestCase].stderr
+                                .split("\n")
+                                .map((line, index) => <div key={index}>{line}</div>)
+                            : "-"}
                     </div>
                   </div>
                 )}
