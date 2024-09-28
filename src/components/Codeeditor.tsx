@@ -156,7 +156,7 @@ export default function CodeEditor({
           toast.error("Time is up");
           setisRunClicked(false);
           setTimeout(() => {
-            router.push("/dashboard");
+            router.push("/kitchen");
           }, 1000);
           return;
         }
@@ -164,7 +164,7 @@ export default function CodeEditor({
         toast.error("Timer not started");
         setisRunClicked(false);
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/kitchen");
         }, 1000);
         return;
       }
@@ -254,7 +254,6 @@ export default function CodeEditor({
             <button
               onClick={() => {
                 void runCode(runCodeParams);
-        
               }}
               className="rounded bg-[#242424] px-4 py-2 text-white disabled:bg-[#24242488] disabled:text-[#ffffff85]"
               disabled={isRunClicked}

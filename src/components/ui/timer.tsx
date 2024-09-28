@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface TimeCount {
   hours: string;
@@ -55,7 +55,7 @@ const Timer = () => {
           setExpiryTime(expiry);
         }
       } catch {
-        router.push("/dashboard");
+        router.push("/kitchen");
       }
     };
 

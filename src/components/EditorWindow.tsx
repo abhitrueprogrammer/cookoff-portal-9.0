@@ -57,7 +57,7 @@ export default function EditorWindow({
           toast.error("Time is up");
           setIsRunClicked(false);
           setTimeout(() => {
-            router.push("/dashboard");
+            router.push("/kitchen");
           }, 1000);
           return;
         }
@@ -65,7 +65,7 @@ export default function EditorWindow({
         toast.error("Timer not started");
         setIsRunClicked(false);
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/kitchen");
         }, 1000);
         return;
       }

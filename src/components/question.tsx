@@ -47,7 +47,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
           toast.error("Time is up");
 
           setTimeout(() => {
-            router.push("/dashboard");
+            router.push("/kitchen");
           }, 1000);
           return;
         }
@@ -55,7 +55,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         toast.error("Timer not started");
 
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/kitchen");
         }, 1000);
         return;
       }
@@ -76,7 +76,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         }
         toast.error("Failed to fetch questions");
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/kitchen");
         }, 2000);
       }
     };

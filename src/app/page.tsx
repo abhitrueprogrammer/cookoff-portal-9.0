@@ -34,7 +34,7 @@ export default function Login() {
         success: "Logged in successfully!",
         error: (err: ApiError) => err.message,
       });
-      setTimeout(() => router.push("/dashboard"), 1000);
+      setTimeout(() => router.push("/kitchen"), 1000);
     } catch {}
     setIsLoading(false);
   }
