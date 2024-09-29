@@ -1,7 +1,5 @@
 "use client";
 
-
-
 import Judgelogo from "@/assets/judge.svg";
 import musclemind from "@/assets/musclemind.svg";
 import sululogo from "@/assets/sulu.svg";
@@ -34,39 +32,39 @@ export default function QuesNavbar({
           </div>
 
           <div className="flex items-center gap-52">
-          <div className="flex ">
-          <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
-              Title sponser
-            </span>
-            <Image
-              src={musclemind as HTMLImageElement}
-              alt="musclemind"
-              width={60}
-              height={40}
-              style={{ marginTop: "3px" }}
-            />
+            <div className="flex">
+              <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
+                Title sponsor
+              </span>
+              <Image
+                src={musclemind as HTMLImageElement}
+                alt="musclemind"
+                width={60}
+                height={40}
+                style={{ marginTop: "3px" }}
+              />
             </div>
-            <div className="flex ">
-            <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
-              Powered by
-            </span>
-            <Image
-              src={Judgelogo as HTMLImageElement}
-              alt="Judge"
-              width={60}
-              height={60}
-              style={{ marginTop: "3px" }}
-            />
-            <span className="strait-regular mx-1 text-lg text-[#FFFFFF]">
-              and
-            </span>
-            <Image
-              src={sululogo as HTMLImageElement}
-              alt="Sulu"
-              width={60}
-              height={60}
-              style={{ marginTop: "-2px" }}
-            />
+            <div className="flex">
+              <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
+                Powered by
+              </span>
+              <Image
+                src={Judgelogo as HTMLImageElement}
+                alt="Judge"
+                width={60}
+                height={60}
+                style={{ marginTop: "3px" }}
+              />
+              <span className="strait-regular mx-1 text-lg text-[#FFFFFF]">
+                and
+              </span>
+              <Image
+                src={sululogo as HTMLImageElement}
+                alt="Sulu"
+                width={60}
+                height={60}
+                style={{ marginTop: "-2px" }}
+              />
             </div>
           </div>
         </div>

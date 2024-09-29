@@ -134,7 +134,7 @@ export default function CodeEditor({
       );
   }, []);
 
-  function handlesyntax (languageId: number):string {
+  function handlesyntax(languageId: number): string {
     switch (languageId) {
       case 71:
         return "python";
@@ -153,7 +153,6 @@ export default function CodeEditor({
       default:
         return "plaintext";
     }
-  
   }
 
   // Load saved code and language from localStorage
@@ -317,6 +316,7 @@ export default function CodeEditor({
             value={sourceCode}
             onMount={handleEditorDidMount}
             onChange={handleOnChange}
+            options={{ minimap: { enabled: false } }}
           />
         </div>
 
@@ -326,7 +326,7 @@ export default function CodeEditor({
               onClick={() => {
                 void runCode(runCodeParams);
               }}
-              className="rounded bg-[#242424] px-4 py-2 text-cream disabled:bg-[#24242488] disabled:text-[#ffffff85] hover:text-white hover:bg-orange-600"
+              className="rounded bg-[#242424] px-4 py-2 text-cream hover:bg-orange-600 hover:text-white disabled:bg-[#24242488] disabled:text-[#ffffff85]"
               disabled={isRunClicked}
             >
               {isRunClicked ? "Cooking..." : "Run Code"}

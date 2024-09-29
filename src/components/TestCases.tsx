@@ -106,10 +106,12 @@ export default function TestCases({ codeData }: testCaseProps) {
                             .split("\n")
                             .map((line, index) => <div key={index}>{line}</div>)
                         : codeData.result[currentTestCase]?.stderr
-                            ? codeData.result[currentTestCase].stderr
-                                .split("\n")
-                                .map((line, index) => <div key={index}>{line}</div>)
-                            : "-"}
+                          ? codeData.result[currentTestCase].stderr
+                              .split("\n")
+                              .map((line, index) => (
+                                <div key={index}>{line}</div>
+                              ))
+                          : "-"}
                     </div>
                   </div>
                 )}
@@ -126,7 +128,7 @@ export default function TestCases({ codeData }: testCaseProps) {
 
                 <div className="my-2">
                   <div className="text-base">Output</div>
-                  <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
+                  <div className="my-2 w-full overflow-x-auto rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.stdout
                       ? codeData.result[currentTestCase].stdout
                           .split("\n")
@@ -137,7 +139,7 @@ export default function TestCases({ codeData }: testCaseProps) {
 
                 <div className="my-2">
                   <div className="text-base">Expected Output</div>
-                  <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
+                  <div className="my-2 overflow-x-auto rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.expected_output
                       ? codeData.result[currentTestCase].expected_output
                           .split("\n")

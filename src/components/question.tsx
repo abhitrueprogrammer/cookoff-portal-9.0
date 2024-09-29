@@ -112,40 +112,47 @@ export default function QuestionComponent({
             <div className="my-5">
               <span className="mr-8 text-xl text-accent">Problem</span>
             </div>
-            <Markdown className="whitespace-pre-line">
-              {selectedQuestion.Description}
-            </Markdown>
+            {/* <div style={{ whiteSpace: "pre-line" }}></div> */}
+            <div className="markdown">
+              <Markdown>{selectedQuestion.Description}</Markdown>
+            </div>
 
             {selectedQuestion.InputFormat && (
-              <div className="mt-4">
-                <strong>Input Format:</strong>
-                <Markdown>
-                  {selectedQuestion.InputFormat.map((item) => `- ${item}`).join(
-                    "\n",
-                  )}
-                </Markdown>
+              <div>
+                <span className="mr-8 text-xl text-accent">Input Format:</span>
+                <div className="markdown">
+                  <Markdown>
+                    {selectedQuestion.InputFormat.map(
+                      (item) => `- ${item}`,
+                    ).join("\n")}
+                  </Markdown>
+                </div>
               </div>
             )}
 
             {selectedQuestion.Constraints && (
-              <div className="mt-4">
-                <strong>Constraints:</strong>
-                <Markdown>
-                  {selectedQuestion.Constraints.map((item) => `- ${item}`).join(
-                    "\n",
-                  )}
-                </Markdown>
+              <div>
+                <div className="mr-8 text-xl text-accent">Constraints:</div>
+                <div className="markdown">
+                  <Markdown>
+                    {selectedQuestion.Constraints.map(
+                      (item) => `- ${item}`,
+                    ).join("\n")}
+                  </Markdown>
+                </div>
               </div>
             )}
 
             {selectedQuestion.OutputFormat && (
-              <div className="mt-4">
-                <strong>Output Format:</strong>
-                <Markdown>
-                  {selectedQuestion.OutputFormat.map(
-                    (item) => `- ${item}`,
-                  ).join("\n")}
-                </Markdown>
+              <div>
+                <div className="mr-8 text-xl text-accent">Output Format:</div>
+                <div className="mt-4">
+                  <Markdown>
+                    {selectedQuestion.OutputFormat.map(
+                      (item) => `- ${item}`,
+                    ).join("\n")}
+                  </Markdown>
+                </div>
               </div>
             )}
 
@@ -160,11 +167,13 @@ export default function QuestionComponent({
                 <div key={i}>
                   {selectedQuestion.SampleTestInput?.[i] && (
                     <div className="mt-4">
-                      <strong>Sample Input {i + 1}:</strong>
+                      <div className="mb-4 mr-8 text-xl text-accent">
+                        Sample Input {i + 1}:
+                      </div>
                       <SyntaxHighlighter
                         language="plaintext"
                         style={vscDarkPlus}
-                        className="my-2 rounded-md"
+                        className="my-4 rounded-md"
                       >
                         {selectedQuestion.SampleTestInput[i]}
                       </SyntaxHighlighter>
@@ -173,7 +182,10 @@ export default function QuestionComponent({
 
                   {selectedQuestion.SampleTestOutput?.[i] && (
                     <div className="mt-4">
-                      <strong>Sample Output {i + 1}:</strong>
+                      <div className="mb-4 mr-8 text-xl text-accent">
+                        Sample Output {i + 1}:
+                      </div>
+
                       <SyntaxHighlighter
                         language="plaintext"
                         style={vscDarkPlus}
@@ -186,7 +198,9 @@ export default function QuestionComponent({
 
                   {selectedQuestion.Explanation?.[i] && (
                     <div className="mt-4">
-                      <strong>Explanation {i + 1}:</strong>
+                      <div className="mb-4 mr-8 text-xl text-accent">
+                        Explanation {i + 1}:
+                      </div>
                       <Markdown>{selectedQuestion.Explanation[i]}</Markdown>
                     </div>
                   )}
