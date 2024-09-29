@@ -14,7 +14,7 @@ export default function NavBar() {
   }
   return (
     <div className="h-[10vh]">
-      <div className="s-sling nav border-b-1 flex items-center justify-around bg-black">
+      <div className="s-sling nav flex h-full items-center justify-around border-b-2 border-cream bg-black">
         <div></div>
         <div className="my-3 text-5xl text-white">
           <span className="text-cream">cook</span>{" "}
