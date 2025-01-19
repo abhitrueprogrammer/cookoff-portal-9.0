@@ -80,14 +80,11 @@ To start your development server run:
 ```bash
 pnpm dev
 ```
+## ✅ Requirements: 
+1. Backend: [https://github.com/CodeChefVIT/cookoff-9.0-backend](https://github.com/CodeChefVIT/cookoff-9.0-backend)
+2. Admin Portal: [https://github.com/CodeChefVIT/cookoff-admin-9.0](https://github.com/CodeChefVIT/cookoff-admin-9.0)
 
 ## 📝 Note:
-
-To have the entire functionality please note that you will have to either create your own backend or fork the official backend of Cookoff-9.0:
-[https://github.com/CodeChefVIT/cookoff-9.0-backend](https://github.com/CodeChefVIT/cookoff-9.0-backend)
-
-You can also make a forked copy of the Admin Portal by heading over to: [https://github.com/CodeChefVIT/cookoff-admin-9.0](https://github.com/CodeChefVIT/cookoff-admin-9.0)
-
 Make sure you set user role as 'admin' in database to access all the admin specific APIs.
 
 ## 🚀 Contributors
