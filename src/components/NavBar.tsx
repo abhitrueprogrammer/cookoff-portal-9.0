@@ -19,7 +19,7 @@ export default function NavBar() {
         <div className="my-3 text-5xl text-white">
           <span className="text-cream">cook</span>{" "}
           <span className="text-accent">off</span>
-          <span className="text-cream"> 9.0</span>{" "}
+          <span className="text-cream"> internal</span>{" "}
         </div>
         <div className="flex justify-evenly text-cream">
           <button

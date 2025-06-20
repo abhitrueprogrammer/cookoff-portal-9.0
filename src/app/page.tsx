@@ -40,12 +40,29 @@ export default function Login() {
   }
 
   return (
-    <div className="min-w-screen h-full-screen flex h-screen flex-col items-center justify-center bg-[#202020] text-accent">
-      <h1 className="s-sling pt-5 text-3xl font-bold text-accent">
-        SC PRESENTS: Cookoff internal portal
+    <div className="min-w-screen relative flex h-screen flex-col items-center justify-center gap-10 bg-[#202020] text-accent">
+      <h1 className="s-sling pt-5 absolute top-2 text-3xl font-bold text-accent">
+        SENIOR CORE PRESENTS
       </h1>
-      <div className="mt-8 flex w-full flex-row">
-        <div className="flex w-full">
+      <div className="mt-8 flex w-full flex-row items-center">
+        <div className="flex w-1/2 flex-col">
+          <div className="flex flex-col">
+            <div className="flex flex-col items-end">
+              <Image
+                className="ml-20 mr-10 pl-14"
+                src={cookoff as HTMLImageElement}
+                alt="cookoff text"
+                width={580}
+                height={400}
+              />
+              <p className="s-sling text-2xl my-[-50px] mx-[50px]" >
+                INTERNAL
+              </p>
+            </div>
+            <div className="relative"></div>
+          </div>
+        </div>
+        <div className="flex w-1/2">
           <div
             className="mx-auto flex h-[510px] w-[450px] flex-col items-center justify-center bg-viewSubmission text-white"
             style={{
@@ -68,7 +85,7 @@ export default function Login() {
                   {...register("email")}
                   type="text"
                   className="mb-6 w-[390px] rounded-sm bg-viewSubmission p-3 placeholder-white"
-                  placeholder="Enter Username"
+                  placeholder="Enter Email"
                   required
                 />
                 {errors?.email?.message && (
@@ -118,6 +135,9 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <h1 className="s-sling pt-5 text-3xl font-bold text-white absolute bottom-3">
+        A COOKING COMPETITION
+      </h1>
     </div>
   );
 }
