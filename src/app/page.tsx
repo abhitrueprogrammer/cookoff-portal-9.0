@@ -42,30 +42,10 @@ export default function Login() {
   return (
     <div className="min-w-screen h-full-screen flex h-screen flex-col items-center justify-center bg-[#202020] text-accent">
       <h1 className="s-sling pt-5 text-3xl font-bold text-accent">
-        CODECHEF PRESENTS
+        SC PRESENTS: Cookoff internal portal
       </h1>
       <div className="mt-8 flex w-full flex-row">
-        <div className="flex w-1/2 flex-col">
-          <div className="flex flex-col">
-            <Image
-              className="ml-20 mr-10 pl-14"
-              src={cookoff as HTMLImageElement}
-              alt="cookoff text"
-              width={580}
-              height={400}
-            />
-            <div className="relative">
-              <Image
-                className="absolute translate-x-[95%]"
-                src={mm as HTMLImageElement}
-                alt="muscle mind logo"
-                width={150}
-                height={150}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="flex w-1/2">
+        <div className="flex w-full">
           <div
             className="mx-auto flex h-[510px] w-[450px] flex-col items-center justify-center bg-viewSubmission text-white"
             style={{
@@ -116,21 +96,28 @@ export default function Login() {
                     {errors.password.message}
                   </p>
                 )}
-                <button
-                  type="submit"
-                  className="s-sling mt-4 w-[100px] rounded-md bg-accent p-3 text-white"
-                  disabled={isLoading}
-                >
-                  Login
-                </button>
+                <div className="flex items-center justify-between">
+                  <button
+                    type="submit"
+                    className="s-sling mt-4 w-[100px] rounded-md bg-accent p-3 text-white"
+                    disabled={isLoading}
+                  >
+                    Login
+                  </button>
+                  <button
+                    type="submit"
+                    className="s-sling mt-4 w-[100px] rounded-md bg-accent p-3 text-white"
+                    disabled={isLoading}
+                    onClick={() => router.push("/signup")}
+                  >
+                    Signup
+                  </button>
+                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <h1 className="s-sling pt-5 text-3xl font-bold text-white">
-        NOT A COOKING COMPETITION
-      </h1>
     </div>
   );
 }
