@@ -24,49 +24,10 @@ export default function QuesNavbar({
     <div className="flex h-[17vh] w-screen flex-row items-center justify-between border-b-2 border-cream bg-black px-10 2xl:h-[14vh]">
       <div>{path !== "/kitchen" && <Timer setTimeOver={setTimeOver} />}</div>
       <div className="flex w-full flex-col items-center">
-        <div className="flex w-fit flex-col">
-          <div>
-            <span className="s-sling mr-8 text-7xl text-cream">COOK</span>
-            <span className="s-sling mr-8 text-7xl text-accent">OFF</span>
-            <span className="s-sling text-7xl text-cream">9.0</span>
-          </div>
-
-          <div className="flex items-center gap-52">
-            <div className="flex">
-              <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
-                Title sponsor
-              </span>
-              <Image
-                src={musclemind as HTMLImageElement}
-                alt="musclemind"
-                width={60}
-                height={40}
-                style={{ marginTop: "3px" }}
-              />
-            </div>
-            <div className="flex">
-              <span className="strait-regular mr-1 text-lg text-[#FFFFFF]">
-                Powered by
-              </span>
-              <Image
-                src={Judgelogo as HTMLImageElement}
-                alt="Judge"
-                width={60}
-                height={60}
-                style={{ marginTop: "3px" }}
-              />
-              <span className="strait-regular mx-1 text-lg text-[#FFFFFF]">
-                and
-              </span>
-              <Image
-                src={sululogo as HTMLImageElement}
-                alt="Sulu"
-                width={60}
-                height={60}
-                style={{ marginTop: "-2px" }}
-              />
-            </div>
-          </div>
+        <div className="flex text-center items-start justify-start ">
+          <span className="s-sling mr-8 text-7xl text-cream">COOK</span>
+          <span className="s-sling mr-8 text-7xl text-accent">OFF</span>
+          <span className="s-sling text-sm text-cream">INTERNAL</span>
         </div>
       </div>
       <div>

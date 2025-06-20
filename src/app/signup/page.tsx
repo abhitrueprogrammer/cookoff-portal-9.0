@@ -95,7 +95,7 @@ export default function Signup() {
 
   return (
     <div className="min-w-screen relative flex h-screen flex-col items-center justify-center gap-10 bg-[#202020] text-accent">
-      <h1 className="s-sling pt-5 text-3xl font-bold text-accent absolute top-2">
+      <h1 className="s-sling absolute top-2 pt-5 text-3xl font-bold text-accent">
         SENIOR CORE PRESENTS
       </h1>
       <div className="mt-8 flex w-full flex-row items-center">
@@ -116,7 +116,7 @@ export default function Signup() {
 
         <div className="flex w-1/2">
           <div
-            className="mx-auto flex h-fit  w-[500px] flex-col items-center justify-center bg-viewSubmission text-white"
+            className="mx-auto flex h-fit w-[500px] flex-col items-center justify-center bg-viewSubmission text-white"
             style={{
               clipPath:
                 "polygon(0 90px, 90px 0, 100% 0, 100% 10px, 100% 85%, 80% 100%, 0 100%, 0 100%)",
@@ -206,13 +206,13 @@ export default function Signup() {
                   <div className="flex justify-between">
                     <Button
                       type="submit"
-                      className="h-auto s-sling bg-accent text-white hover:bg-accent py-4"
+                      className="s-sling h-auto bg-accent py-4 text-white hover:bg-accent"
                     >
                       Submit
                     </Button>
                     <Button
                       type="button"
-                      className="h-auto s-sling bg-accent text-white hover:bg-accent py-4"
+                      className="s-sling h-auto bg-accent py-4 text-white hover:bg-accent"
                       onClick={() => router.push("/")}
                     >
                       Back to Login
@@ -223,10 +223,17 @@ export default function Signup() {
 
               <div className="mt-4 flex items-center space-x-2 text-sm text-gray-300">
                 <p className="flex-1">
-                  {password
-                    ? `Your password is: ${password}. Please save it securely.`
-                    : "Your password will be generated after submission."}
+                  {password ? (
+                    <>
+                      Your password is:{" "}
+                      <span className="text-accent">{password}</span>. Please
+                      save it securely.
+                    </>
+                  ) : (
+                    "Your password will be generated after submission."
+                  )}
                 </p>
+
                 {password && (
                   <button
                     type="button"
@@ -242,7 +249,7 @@ export default function Signup() {
           </div>
         </div>
       </div>
-      <h1 className="s-sling pt-5 text-3xl font-bold text-white absolute bottom-3">
+      <h1 className="s-sling absolute bottom-3 pt-5 text-3xl font-bold text-white">
         A COOKING COMPETITION
       </h1>
     </div>
